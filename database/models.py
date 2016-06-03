@@ -34,3 +34,26 @@ class UserTable(models.Model):
 	Tel = models.CharField()
 	MailAddr = models.CharField()
 	Age = models.IntegerField()
+
+class InstDealed(models.Model): #the table of Dealed Instructions
+	InstID = models.CharField()
+	TimeSubmit = models.DateTimeField()
+	TimeDealed = models.DateTimeField()
+	InstType = models.IntegerField() # buy/sell
+	StockID = models.CharField()
+	AccountID = models.ForeignKey(CapitalAccountInfo)
+	SecurityID = models.ForeignKey(SecurityAccountInfo)
+	Quantity = models.IntegerField()
+	PriceSubmit = models.FloatField() #submit price
+	PriceDealed = models.FloatField() #dealed price
+
+class InstOutOfDate(models.Model): #the table of Dealed Instructions
+	InstID = models.CharField()
+	TimeSubmit = models.DateTimeField()#submit time
+	TimeOutOfDate = models.DateTimeField() #out of date time
+	InstType = models.IntegerField() # buy/sell
+	StockID = models.CharField() 
+	AccountID = models.ForeignKey(CapitalAccountInfo)
+	SecurityID = models.ForeignKey(SecurityAccountInfo)
+	Quantity = models.IntegerField()
+	PriceSubmit = models.FloatField() #submit price
