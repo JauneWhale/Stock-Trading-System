@@ -38,28 +38,31 @@ class CapitalAccountInfo(models.Model):
 	IsTransFreeze = models.BooleanField()
 	IsLoginFreeze = models.BooleanField()
 
-class InstDealed(models.Model): #the table of Dealed Instructions
+#成交指令表
+class InstDealed(models.Model): 
 	InstID = models.CharField(max_length=20)
-	TimeSubmit = models.DateTimeField()
-	TimeDealed = models.DateTimeField()
-	InstType = models.IntegerField() # buy/sell
+	TimeSubmit = models.DateTimeField() #提交时间
+	TimeDealed = models.DateTimeField() #成交时间
+	InstType = models.IntegerField() # 买/卖
 	StockID = models.CharField(max_length=20)
 	AccountID = models.ForeignKey(CapitalAccountInfo)
 	SecurityID = models.ForeignKey(SecurityAccountInfo)
 	Quantity = models.IntegerField()
-	PriceSubmit = models.FloatField() #submit price
-	PriceDealed = models.FloatField() #dealed price
+	PriceSubmit = models.FloatField() # 提交价格
+	PriceDealed = models.FloatField() # 成交价格
 
-class InstOutOfDate(models.Model): #the table of Dealed Instructions
+#未成交指令表
+class InstNotDealed(models.Model): 
 	InstID = models.CharField(max_length=20)
-	TimeSubmit = models.DateTimeField()#submit time
-	TimeOutOfDate = models.DateTimeField() #out of date time
-	InstType = models.IntegerField() # buy/sell
+	TimeSubmit = models.DateTimeField() # 提交时间
+	TimeOutOfDate = models.DateTimeField() #过期时间
+	InstType = models.IntegerField() # 买/卖
+	InstState = models.IntegerField() # 过期/撤销
 	StockID = models.CharField(max_length=20) 
 	AccountID = models.ForeignKey(CapitalAccountInfo)
 	SecurityID = models.ForeignKey(SecurityAccountInfo)
-	Quantity = models.IntegerField()
-	PriceSubmit = models.FloatField() #submit price
+	Quantity = models.IntegerField() # 股票数量
+	PriceSubmit = models.FloatField() # 提交价格
 
 # 资金信息
 class CapitalInfo(models.Model):
