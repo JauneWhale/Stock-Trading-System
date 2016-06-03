@@ -5,6 +5,22 @@ from django.db import models
 
 # Create your models here.
 
+class UserTable(models.Model):
+	UserID = models.CharField()
+	Name = models.CharField()
+	IDcard = models.CharField()
+	Gender = models.IntegerField()
+	Occupation = models.CharField()
+	EduInfo = models.CharField()
+	HomeAddr = models.TextField()
+	Department = models.TextField()
+	Tel = models.CharField()
+	MailAddr = models.CharField()
+	Age = models.IntegerField()
+
+class SecurityAccountInfo(models.Model):
+	SecurityID = models.CharField()
+
 class CapitalAccountInfo(models.Model):
 	AccountID = models.CharField()
 	Password = models.CharField()
@@ -19,18 +35,5 @@ class CapitalAccountInfo(models.Model):
 	IsTransFreeze = models.BooleanField()
 	IsLoginFreeze = models.BooleanField()
 
-class SecurityAccountInfo(models.Model):
-	SecurityID = models.CharField()
 
-class UserTable(models.Model):
-	UserID = models.CharField()
-	Name = models.CharField()
-	IDcard = models.CharField()
-	Gender = models.IntegerField()
-	Occupation = models.CharField()
-	EduInfo = models.CharField()
-	HomeAddr = models.TextField()
-	Department = models.TextField()
-	Tel = models.CharField()
-	MailAddr = models.CharField()
-	Age = models.IntegerField()
+
