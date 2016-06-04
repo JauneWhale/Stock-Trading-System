@@ -63,6 +63,19 @@ class InstNotDealed(models.Model):
 	SecurityID = models.ForeignKey(SecurityAccountInfo)
 	Quantity = models.IntegerField() # 股票数量
 	PriceSubmit = models.FloatField() # 提交价格
+# 股票信息
+class StockInfo(models.Model):
+	StockName = models.TextField()
+	StockID = models.CharField(max_length=20) 
+	CurrentPrice = models.FloatField() # 当前价
+	MaxPrice = models.FloatField() # 当日最高价
+	MinPrice = models.FloatField() # 当日最低价
+	TodayOpeningPrice = models.FloatField() # 今开
+	YesterdayClosingPrice = models.FloatField() # 昨收
+	Quantity = models.IntegerField() # 数量
+	UpLimit = models.FloatField() # 涨幅
+	BottomLimit = models.FloatField() # 跌幅
+	
 
 # 资金信息
 class CapitalInfo(models.Model):
