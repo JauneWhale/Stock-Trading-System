@@ -18,9 +18,9 @@ from django.conf.urls import url
 from django.conf.urls.static import static
 from django.contrib import admin
 from Transaction_Client import views as Transaction_Client_views
-
+from login import views as login_views
 urlpatterns = [
-    url(r'^$', 'login.views.index', name='login'),
+    url(r'^$', login_views.index),
     #example
     url(r'^admin/', admin.site.urls),
     #Transaction Client
