@@ -16,7 +16,7 @@ class UserTable(models.Model):
 	HomeAddr = models.TextField()
 	Department = models.TextField()
 	Tel = models.CharField(max_length=20)
-	MailAddr = models.CharField(max_length=20)
+	MailAddr = models.CharField(max_length=30)
 	Age = models.IntegerField()
 
 # 证券账户基本信息
