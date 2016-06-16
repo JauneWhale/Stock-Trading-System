@@ -63,6 +63,7 @@ class InstNotDealed(models.Model):
 	SecurityID = models.ForeignKey(SecurityAccountInfo)
 	Quantity = models.IntegerField() # 股票数量
 	PriceSubmit = models.FloatField() # 提交价格
+
 # 股票信息
 class StockInfo(models.Model):
 	StockName = models.TextField()

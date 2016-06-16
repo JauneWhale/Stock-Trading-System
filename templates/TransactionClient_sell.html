@@ -1,0 +1,322 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>User Account - Bootstrap Admin</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet" />
+    
+    
+    <link href="/static/css/font-awesome.css" rel="stylesheet" />
+    
+    <link href="/static/css/adminia.css" rel="stylesheet" /> 
+    <link href="/static/css/adminia-responsive.css" rel="stylesheet" /> 
+    
+    
+    <link href="/static/css/pages/plans.css" rel="stylesheet" /> 
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+	
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+
+<body>
+	
+<div class="navbar navbar-fixed-top">
+	
+	<div class="navbar-inner">
+		
+		<div class="container">
+			
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span> 				
+			</a>
+			
+			<a class="brand" href="./">Transaction System</a>
+			
+			<div class="nav-collapse">
+			
+				<ul class="nav pull-right">
+					<li>
+						<a href="#"><span class="badge badge-warning">7</span></a>
+					</li>
+					
+					<li class="divider-vertical"></li>
+					
+					<li class="dropdown">
+						
+						<a data-toggle="dropdown" class="dropdown-toggle " href="#">
+							{{ username }} <b class="caret"></b>							
+						</a>
+						
+						<ul class="dropdown-menu">
+													
+							<li>
+								<a href="/TransactionClient/password/"><i class="icon-lock"></i> Change Password</a>
+							</li>
+							
+							<li class="divider"></li>
+							
+							<li>
+								<a href="/TransactionClient/logout/"><i class="icon-off"></i> Logout</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				
+			</div> <!-- /nav-collapse -->
+			
+		</div> <!-- /container -->
+		
+	</div> <!-- /navbar-inner -->
+	
+</div> <!-- /navbar -->
+
+
+
+
+<div id="content">
+	
+	<div class="container">
+		
+		<div class="row">
+			
+			<div class="span3">
+				
+				<div class="account-container">
+				
+					<div class="account-avatar">
+						<img src="/static/img/headshot.png" alt="" class="thumbnail" />
+					</div> <!-- /account-avatar -->
+				
+					<div class="account-details">
+					
+						<span class="account-name">{{ username }}</span>
+						
+						<span class="account-role">Status: {{ status }}</span>
+						
+					
+					</div> <!-- /account-details -->
+				
+				</div> <!-- /account-container -->
+				
+				<hr />
+				
+                <ul id="main-nav" class="nav nav-tabs nav-stacked">
+
+                    <li>
+						<a href="/TransactionClient/capital/">
+							<i class="icon-user"></i>
+							Capital Account 		
+						</a>
+					</li>
+					
+					<li>
+						<a href="/TransactionClient/possessed/">
+							<i class="icon-th-list"></i>
+							Possessed Stock
+						</a>
+					</li>
+					
+					<li>
+						<a href="/TransactionClient/stock/">
+							<i class="icon-th-list"></i>
+							Stock Information		
+						</a>
+					</li>
+					
+					<li>
+						<a href="/TransactionClient/transaction/">
+							<i class="icon-signal"></i>
+							Transaction
+						</a>
+					</li>
+					
+					<li>
+						<a href="/TransactionClient/purchase/">
+							<i class="icon-th-large"></i>
+							Purchase	
+						</a>
+					</li>
+					
+					<li class="active">
+						<a href="/TransactionClient/sell/">
+							<i class="icon-th-large"></i>
+							Sell							
+						</a>
+					</li>
+					
+					<li>
+						<a href="/TransactionClient/faq/">
+							<i class="icon-pushpin"></i>
+							FAQ	
+						</a>
+					</li>
+
+                </ul>	
+				
+				<hr />
+				
+				<br />
+		
+			</div> <!-- /span3 -->
+			
+			
+			
+			<div class="span9">
+				
+				<h1 class="page-title">
+					<i class="icon-th-large"></i>
+					Sell				
+				</h1>
+				
+				
+				<div class="row">
+					
+					<div class="span9">
+				
+						<div class="widget">
+									
+							<div class="widget-content">
+								
+								
+								
+								<div class="tabbable">
+					
+						
+						<br />
+						
+							<div class="tab-content">
+								<div class="tab-pane active" id="1">
+								<form id="edit-profile" class="form-horizontal" action = "/TransactionClient/sellStock/" method = "post"/>
+									{% csrf_token %}
+									<fieldset>
+										
+										<div class="control-group">											
+											<label class="control-label" for="username">Stock Ticker</label>
+											<div class="controls">
+												<input type="text" class="input-medium disabled" id="ticker" onchange="check_input()" />
+                                                <p class="help-block" style="color:green"> Stock Name：<span id='stock_name'></span></p>
+												<p class="help-block" style="color:green"> Market Price：<span id='market_price'></span></p>
+												<p class="help-block" style="color:green"> Top Price：<span id='top_price'></span></p>
+												<p class="help-block" style="color:green"> Bottom Price：<span id='bottom_price'></span></p>
+											</div> <!-- /controls -->				
+										</div> <!-- /control-group -->
+										
+										
+										<div class="control-group">											
+											<label class="control-label" for="firstname">Selling Price</label>
+											<div class="controls">
+												<input type="text" class="input-medium" id="selling_price" name="sellPrice" />
+											</div> <!-- /controls -->				
+										</div> <!-- /control-group -->
+										
+										<div class="control-group">											
+											<label class="control-label" for="lastname">Selling Quantity</label>
+											<div class="controls">
+												<input type="text" class="input-medium" id="selling_quantity" name="sellAmount" />
+											</div> <!-- /controls -->				
+										</div> <!-- /control-group -->		
+
+										<div class="control-group">
+                                            <label class="control-label" for="password">Transaction Password</label>
+                                            <div class="controls">
+                                                <input type="password" name="trans_passwd" class="input-medium" id="password" />
+                                            </div> <!-- /controls -->
+                                        </div> <!-- /control-group -->										
+											
+                                        <br />
+
+
+										<div class="form-actions">
+											<button type="submit" class="btn btn-primary" id="submit" disabled="true">Submit</button> 
+											<button class="btn">Cancel</button>
+										</div> <!-- /form-actions -->
+									</fieldset>
+								</form>
+								</div>
+							</div>
+						  
+						  
+						</div>
+								
+								
+								
+								
+								
+								
+								
+								
+							</div> <!-- /widget-content -->
+							
+						</div> <!-- /widget -->
+						
+					</div> <!-- /span9 -->
+					
+				</div> <!-- /row -->
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div> <!-- /span9 -->
+			
+			
+		</div> <!-- /row -->
+		
+	</div> <!-- /container -->
+	
+</div> <!-- /content -->
+					
+	
+
+
+    
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/static/js/jquery-1.7.2.min.js"></script>
+<script src="/static/js/bootstrap.js"></script>
+<script type="text/javascript">
+	function check_input(){
+		var stock_id = $("#ticker").val();
+		$.get("/TransactionClient/sell_stock_id_check/",{'stock_id':stock_id}, function(ret){
+			console.log(ret);
+            var val = ret.split("#");
+            if(val[0] == "0"){
+            	$("#stock_name").html("You don't own the stock");
+            	$("#stock_name").attr("style","color:red");
+            	$("#market_price").html("");
+            	$("#top_price").html("");
+            	$("#bottom_price").html("");
+            	$("#submit").attr("disabled", true);
+            }
+            else{
+            	$("#stock_name").html(val[0]);
+            	$("#stock_name").attr("style","color:green");
+            	$("#market_price").html("¥"+val[1]);
+            	$("#top_price").html("¥"+val[2]);
+            	$("#bottom_price").html("¥"+val[3]);
+            	$("#submit").attr("disabled", false);
+            }
+        })
+	};
+
+</script>
+
+
+  </body>
+</html>

@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>User Account - Bootstrap Admin</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet" />
+    
+    
+    <link href="/static/css/font-awesome.css" rel="stylesheet" />
+    
+    <link href="/static/css/adminia.css" rel="stylesheet" /> 
+    <link href="/static/css/adminia-responsive.css" rel="stylesheet" /> 
+    
+    
+    <link href="./css/pages/plans.css" rel="stylesheet" /> 
+
+    <style type="text/css">
+    	#main-nav.nav-tabs.nav-stacked > li {	
+			padding: 10px 8px;
+			
+			font-size: 12px;
+			font-weight: 600;
+			color: #c0c0c0;
+			
+			background: #E9E9E9;
+			background:-moz-linear-gradient(top, #FAFAFA 0%, #E9E9E9 100%); /* FF3.6+ */
+			background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#FAFAFA), color-stop(100%,#E9E9E9)); /* Chrome,Safari4+ */
+			background:-webkit-linear-gradient(top, #FAFAFA 0%,#E9E9E9 100%); /* Chrome10+,Safari5.1+ */
+			background:-o-linear-gradient(top, #FAFAFA 0%,#E9E9E9 100%); /* Opera11.10+ */
+			background:-ms-linear-gradient(top, #FAFAFA 0%,#E9E9E9 100%); /* IE10+ */
+			background:linear-gradient(top, #FAFAFA 0%,#E9E9E9 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FAFAFA', endColorstr='#E9E9E9');
+			-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#FAFAFA', endColorstr='#E9E9E9')";
+			
+			
+			border: 1px solid #D5D5D5;
+			
+			border-radius: 4px;
+		}
+		#main-nav.nav-tabs.nav-stacked > li.active {	
+			color: #FFF;
+			
+			background: #3C4049;
+			background:-moz-linear-gradient(top, #4A515B 0%, #3C4049 100%); /* FF3.6+ */
+			background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#4A515B), color-stop(100%,#3C4049)); /* Chrome,Safari4+ */
+			background:-webkit-linear-gradient(top, #4A515B 0%,#3C4049 100%); /* Chrome10+,Safari5.1+ */
+			background:-o-linear-gradient(top, #4A515B 0%,#3C4049 100%); /* Opera11.10+ */
+			background:-ms-linear-gradient(top, #4A515B 0%,#3C4049 100%); /* IE10+ */
+			background:linear-gradient(top, #4A515B 0%,#3C4049 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4A515B', endColorstr='#3C4049');
+			-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#4A515B', endColorstr='#3C4049')";
+			
+			border-color: #2B2E33;
+		}
+		}
+    </style>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+	
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+
+<body>
+	
+<div class="navbar navbar-fixed-top">
+	
+	<div class="navbar-inner">
+		
+		<div class="container">
+			
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span> 				
+			</a>
+			
+			<a class="brand" href="./">Transaction System</a>
+			
+			<div class="nav-collapse">
+			
+				<ul class="nav pull-right">
+					<li>
+						<a href="#"><span class="badge badge-warning">0</span></a>
+					</li>
+					
+					<li class="divider-vertical"></li>
+					
+					<li class="dropdown">
+						
+						<a data-toggle="dropdown" class="dropdown-toggle " href="#">
+							Visitor <b class="caret"></b>							
+						</a>
+						
+						<ul class="dropdown-menu">
+							
+							<li>
+								<a href="./"><i class="icon-off"></i> Login</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				
+			</div> <!-- /nav-collapse -->
+			
+		</div> <!-- /container -->
+		
+	</div> <!-- /navbar-inner -->
+	
+</div> <!-- /navbar -->
+
+
+
+
+<div id="content">
+	
+	<div class="container">
+		
+		<div class="row">
+			
+			<div class="span3">
+				
+				<div class="account-container">
+				
+					<div class="account-avatar">
+						<img src="/static/img/visitor.jpg" alt="" class="thumbnail" />
+					</div> <!-- /account-avatar -->
+				
+					<div class="account-details">
+					
+						<span class="account-name">Visitor</span>
+						
+						<span class="account-actions">
+							<a href="/TransactionClient/">Login</a>
+						</span>
+					
+					</div> <!-- /account-details -->
+				
+				</div> <!-- /account-container -->
+				
+				<hr />
+				
+					
+				
+                <ul id="main-nav" class="nav nav-tabs nav-stacked">
+
+                    <li>
+                            <i class="icon-user"></i>
+                            Capital Account
+                    </li>
+
+                    <li>
+                            <i class="icon-th-list"></i>
+                            Processed Stock
+                    </li>
+
+                    <li class="active">
+                            <i class="icon-th-list"></i>
+                            Stock Information
+                    </li>
+
+                    <li>
+                            <i class="icon-signal"></i>
+                            Transaction
+                    </li>
+
+                    <li>
+                            <i class="icon-th-large"></i>
+                            Purchase
+                    </li>
+
+                    <li>
+                            <i class="icon-th-large"></i>
+                            Sell
+                    </li>
+
+                    <li>
+                            <i class="icon-pushpin"></i>
+                            FAQ
+                    </li>
+
+                </ul>
+				
+				<hr />
+			
+				
+				<br />
+		
+			</div> <!-- /span3 -->
+			
+			
+			
+			<div class="span9">
+				
+				<h1 class="page-title">
+					<i class="icon-th-large"></i>
+                    Stock Information				
+				</h1>
+				
+				
+				<div class="row">
+					
+					
+				</div> <!-- /row -->
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div> <!-- /span9 -->
+			
+			
+		</div> <!-- /row -->
+		
+	</div> <!-- /container -->
+	
+</div> <!-- /content -->
+					
+	
+
+
+    
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="./js/jquery-1.7.2.min.js"></script>
+
+
+<script src="./js/bootstrap.js"></script>
+
+  </body>
+</html>

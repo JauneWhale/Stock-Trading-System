@@ -16,7 +16,7 @@
     <link href="/static/css/adminia.css" rel="stylesheet" />
     <link href="/static/css/adminia-responsive.css" rel="stylesheet" />
     
-    <link href="/statc/css/pages/login.css" rel="stylesheet" />
+    <link href="/static/css/pages/login.css" rel="stylesheet" />
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -71,18 +71,19 @@
 	
 	<div id="login-content" class="clearfix">
 	
-	<form action="./" />
+	<form action="/TransactionClient/check/" method="post">
+	{% csrf_token %}
 				<fieldset>
 					<div class="control-group">
 						<label class="control-label" for="username">Username</label>
 						<div class="controls">
-							<input type="text" class="" id="username" />
+							<input type="text" class="" id="username" name="username"/>
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label" for="password">Password</label>
 						<div class="controls">
-							<input type="password" class="" id="password" />
+							<input type="password" class="" id="password" name="password"/>
 						</div>
 					</div>
 				</fieldset>
@@ -93,7 +94,7 @@
 				</div>
 				
 				<div class="pull-right">
-					<button type="submit" class="btn btn-warning btn-large">
+					<button type="submit" value="submit" class="btn btn-warning btn-large" >
 						Login
 					</button>
 				</div>
@@ -104,7 +105,7 @@
 		
 		<div id="login-extra">
 			
-			<p>Don't want to login? <a href="javascript:;">Visit as a visitor.</a></p>
+			<p>Don't want to login? <a href="/TransactionClient/unlogin/">Visit as a visitor.</a></p>
 			
 		</div> <!-- /login-extra -->
 	

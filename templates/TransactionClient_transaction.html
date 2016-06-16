@@ -1,0 +1,301 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Dashboard - Bootstrap Admin</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet" />
+    
+    
+    <link href="/static/css/font-awesome.css" rel="stylesheet" />
+    
+    <link href="/static/css/adminia.css" rel="stylesheet" /> 
+    <link href="/static/css/adminia-responsive.css" rel="stylesheet" /> 
+    
+    <link href="/static/css/pages/dashboard.css" rel="stylesheet" /> 
+    <link href="/static/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+	
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+
+<body>
+	
+<div class="navbar navbar-fixed-top">
+    
+    <div class="navbar-inner">
+        
+        <div class="container">
+            
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> 
+                <span class="icon-bar"></span> 
+                <span class="icon-bar"></span> 
+                <span class="icon-bar"></span>              
+            </a>
+            
+            <a class="brand" href="./">Transaction System</a>
+            
+            <div class="nav-collapse">
+            
+                <ul class="nav pull-right">
+                    <li>
+                        <a href="#"><span class="badge badge-warning">7</span></a>
+                    </li>
+                    
+                    <li class="divider-vertical"></li>
+                    
+                    <li class="dropdown">
+                        
+                        <a data-toggle="dropdown" class="dropdown-toggle " href="#">
+                            {{ username }} <b class="caret"></b>                            
+                        </a>
+                        
+                        <ul class="dropdown-menu">
+                            
+                            <li>
+                                <a href="/TransactionClient/password/"><i class="icon-lock"></i> Change Password</a>
+                            </li>
+                            
+                            <li class="divider"></li>
+                            
+                            <li>
+                                <a href="/TransactionClient/"><i class="icon-off"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                
+            </div> <!-- /nav-collapse -->
+            
+        </div> <!-- /container -->
+        
+    </div> <!-- /navbar-inner -->
+    
+</div> <!-- /navbar -->
+
+
+
+<div id="content">
+	
+	<div class="container">
+		
+        <div class="row">
+
+            <div class="span3">
+
+                <div class="account-container">
+
+                    <div class="account-avatar">
+                        <img src="/static/img/headshot.png" alt="" class="thumbnail" />
+                    </div> <!-- /account-avatar -->
+
+                    <div class="account-details">
+
+                        <span class="account-name">{{ username }}</span>
+
+                        <span class="account-role">Status: {{ status }}</span>
+
+                    </div> <!-- /account-details -->
+
+                </div> <!-- /account-container -->
+
+                <hr />
+
+                <ul id="main-nav" class="nav nav-tabs nav-stacked">
+
+                    <li>
+                        <a href="/TransactionClient/capital/">
+                            <i class="icon-user"></i>
+                            Capital Account
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/TransactionClient/possessed/">
+                            <i class="icon-th-list"></i>
+                            Possessed Stock
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/TransactionClient/stock/">
+                            <i class="icon-th-list"></i>
+                            Stock Information
+                        </a>
+                    </li>
+
+                    <li class="active">
+                        <a href="/TransactionClient/transaction/">
+                            <i class="icon-signal"></i>
+                            Transaction
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/TransactionClient/purchase/">
+                            <i class="icon-th-large"></i>
+                            Purchase
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/TransactionClient/sell/">
+                            <i class="icon-th-large"></i>
+                            Sell
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/TransactionClient/faq/">
+                            <i class="icon-pushpin"></i>
+                            FAQ
+                        </a>
+                    </li>
+
+                </ul>
+
+                <hr />
+
+
+                <br />
+
+            </div> <!-- /span3 -->
+
+
+
+            <div class="span9">
+                <h1 class="page-title">
+                    <i class="icon-signal"></i>
+                    Transaction
+                </h1>
+                <a href="https://github.com/smalot/bootstrap-datetimepicker"></a>
+                <form action="/TransactionClient/transaction/" method="post">
+                    {% csrf_token %}
+               <!--     <div class="input-append date form_datetime" data-date="2013-02-21T15:25:00Z">
+                        <span class="add-on"><i class="icon-remove"></i></span>
+                        <span class="add-on"><i class="icon-calendar"></i></span>
+                    </div>
+                  
+                    <script type="text/javascript" src="/static/js/jquery-1.8.3.min.js" charset="UTF-8"></script>
+                    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+                    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+                    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+                    <script type="text/javascript">
+
+                        $(".form_datetime").datetimepicker({
+                            format: "yyyy-mm-dd",
+                            autoclose: true,
+                            todayBtn: true,
+                            todayHighlight: true,
+                            pickerPosition: "bottom-left",
+                            startView: 2//月视图
+                        });
+                    </script> -->
+
+                    <input type="radio" name="search" value="date" checked="checked" /> Search by date
+                    <input name="begin_year" size="16" type="text" value="" style="width: 50px">年
+                    <input name="begin_month" size="16" type="text" value="" style="width: 50px">月
+                    <input name="begin_day" size="16" type="text" value="" style="width: 50px">日 ~
+                    <input name="end_year" size="16" type="text" value="" style="width: 50px">年
+                    <input name="end_month" size="16" type="text" value="" style="width: 50px">月
+                    <input name="end_day" size="16" type="text" value="" style="width: 50px">日<br />
+
+                    <input type="radio" name="search" value="stock" /> Search by ticker 
+                    <input name="ticker" size="16" type="text" value="">
+                    <button type="submit" value="submit" class="btn btn-warning btn-large">
+                        Search
+                    </button>
+                </form>
+
+            </script>
+            <!--Datepicker-->
+
+            <div class="widget widget-table">
+
+                <div class="widget-header">
+                    <i class="icon-th-list"></i>
+                    <h3>Table</h3>
+                </div> <!-- /widget-header -->
+
+                <div class="widget-content">
+
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Operation</th>
+                                <th>Amount</th>
+                                <th>Average Price</th>
+                                <th>Total Price</th>
+                                <th>State</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for i in TransactionList %}
+                            <tr>
+                                <td>{{ i.0 }}</td>
+                                <td>{{ i.1 }}</td>
+                                <td>{{ i.2 }}</td>
+                                <td>
+                                {% if i.3 == 0 %}
+                                    buy
+                                {% elif i.3 == 1 %}
+                                    sell
+                                {% endif %}
+                                </td>
+                                <td>{{ i.4 }}</td>
+                                <td>{{ i.5 }}</td>
+                                <td>{{ i.6 }}</td>
+                                <td>
+                                {% if i.7 == 0 %}
+                                    dealed
+                                {% elif i.7 == 1 %}
+                                    on market
+                                {% elif i.7 == 2 %}
+                                    <button type="submit" value="submit">
+                                        Recall
+                                    </button>
+                                {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+
+                            <tr>
+                        </tbody>
+                    </table>
+
+                </div> <!-- /widget-content -->
+
+            </div> <!-- /widget -->
+        </div> <!-- /span9 -->
+			
+			
+		</div> <!-- /row -->
+		
+	</div> <!-- /container -->
+	
+</div> 
+					
+	
+
+    
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/static/js/jquery-1.7.2.min.js"></script>
+<script src="/static/js/bootstrap.js"></script>
+
+  </body>
+</html>
