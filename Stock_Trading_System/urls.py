@@ -18,7 +18,7 @@ from django.conf.urls import url
 from django.conf.urls.static import static
 from django.contrib import admin
 from Transaction_Client import views as Transaction_Client_views
-
+from central import views as central_views
 urlpatterns = [
     url(r'^$', 'login.views.index', name='login'),
     #example
@@ -45,6 +45,11 @@ urlpatterns = [
  
 
     url(r'^TransactionClient/modipasswd/', Transaction_Client_views.modipasswd, name='modipasswd'),
+	#Central Trading System
+	#init
+	url(r'^init/',central_views.initial),
+	#InsertTest
+	url(r'^insert/',central_views.insert),
 
 
 ]
