@@ -1,25 +1,40 @@
-import Queue
+# import Queue;
 
-class PriorityQueue(Queue.Queue):
-	def _init(self,maxSize):
-		self.queue = []
-	def _qsize(self, len=len):
-		return len(self.queue)
+class PriorityQueue(object):
+
+	def __init__(self):
+		self.queue = [];
+
+	def qsize(self, len=len):
+		return len(self.queue);
+
+	def empty(self):
+		return len(self.queue) == 0;
+
 	def put_l2h(self, item):
-		data,priority = item
-		self._insort_right((priority, data))
+		data,priority = item;
+		self._insort_right((priority, data));
+	
 	def put_h2l(self, item):
-		data,priority = item
-		self._insort_left((priority, data))
-	def remove(self, instID):
-		for i in range(qsize()):
-			if(i is instID):
-				return true
-		return false
-		
-		
-	def _get(self):
-		return self.queue.pop(0)[1]
+		data,priority = item;
+		self._insort_left((priority, data));
+	
+	def remove(self, instId):	# remove by instId which is wierd but we have no choice
+		for i in range(0, len(self.queue)):
+			if( self.queue[i][1][0] == instID):
+				self.queue.pop(i);
+		assert False
+
+	def update(self, inst, idx):
+		assert idx < len(self.queue);
+		self.queue[idx][1] = inst;
+
+	def peek(self):
+		return list(self.queue[0][1]);
+
+	def get(self):
+		return self.queue.pop(0)[1];	# (priority, data)
+	
 	def _insort_right(self, x):
 		"""Insert item x in list, and keep it sorted from low to high assuming a is sorted.
 		If x is already in list, insert it to the right of the rightmost x.       
@@ -33,6 +48,7 @@ class PriorityQueue(Queue.Queue):
 			if x[0] < a[mid][0]: hi = mid
 			else: lo = mid+1
 		a.insert(lo, x)
+	
 	def _insort_left(self, x):
 		"""Insert item x in list, and keep it sorted from high to low assuming a is sorted.
 		If x is already in list, insert it to the right of the rightmost x.       
@@ -45,7 +61,8 @@ class PriorityQueue(Queue.Queue):
 			mid = (lo+hi)/2
 			if x[0] > a[mid][0]: hi = mid
 			else: lo = mid+1
-		a.insert(lo, x)
+		a.insert(lo, list(x))
+
 def test():
 	pq = PriorityQueue()
 
@@ -58,4 +75,4 @@ def test():
 	while not pq.empty():
 		print(pq.get())
 
-#test() 
+# test() 
