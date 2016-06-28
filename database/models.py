@@ -93,3 +93,8 @@ class SecurityStockInfo(models.Model):
 	ShareHolding = models.IntegerField()	#股数
 	status = models.IntegerField()
 	BuyPrice = models.FloatField()
+
+# 管理员管理股票列表
+class StockManage(models.Model):
+    AdminID = models.ForeignKey(UserTable, related_name="admin")
+    StockID = models.ForeignKey(StockInfo, related_name="stock")

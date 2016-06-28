@@ -20,6 +20,7 @@ from django.contrib import admin
 from Transaction_Client import views as Transaction_Client_views
 # from central import views as central_views
 from userAccount import views as userAccount_views
+from manageStock import views as manageStock_views
 
 urlpatterns = [
     url(r'^$', 'login.views.index', name='login'),
@@ -83,7 +84,13 @@ urlpatterns = [
     # change password(include login password and transaction password)
     url(r'^userAccount/changePassword/', userAccount_views.changePassword, name='userAccount_changePassword'),    
      
-
+# Manage Stocks
+    url(r'^Manage/getStockInfo/', manageStock_views.GetStockInfo, name = 'getStockInfo'),
+    url(r'^Manage/getStockList/', manageStock_views.GetStockList, name = "getStockList"),
+    url(r'^Manage/freeze/', manageStock_views.FreezeStock, name = 'freezeStock'),
+    url(r'^Manage/resume/', manageStock_views.RemuseStock, name = 'resumeStock'),
+    url(r'^Manage/setLimit/', manageStock_views.SetLimit, name ='setLimit'),
+    url(r'^Manage/', manageStock_views.home, name = 'manage_home'),
 
 ]
 
