@@ -3,15 +3,15 @@ import sys;
 import os;
 
 # NOTE: PLEASE comment or edit this line if you want to test the module yourself
-sys.path.append('C:/users/shorc/documents/github/stock_trading_system/');
+# sys.path.append('C:/users/shorc/documents/github/stock_trading_system/');
 
 
 # environment stuff
 from django.apps import apps;
 from django.conf import settings;
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Stock_Trading_System.settings");
+# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Stock_Trading_System.settings");
 from django.core.management import execute_from_command_line;
-execute_from_command_line(sys.argv);
+# execute_from_command_line(sys.argv);
 # ~~env
 
 # database dependence
@@ -22,7 +22,8 @@ from globalvar import GlobalVar;
 from priorityQueue import PriorityQueue;
 
 glob = GlobalVar();
-instIdCount = 0;
+global instIdCount
+instIdCount = 0
 
 
 def init_central_trading_system():
