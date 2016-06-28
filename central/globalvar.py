@@ -13,12 +13,13 @@ class GlobalVar(object):
 	def __init__(self):
 		self.InstQueue = {};
 		self.InstNotDealt = {};
-
+		self.instIdCount = 0;
+	#inst = (ID,time,type,StockID,securityID,accountID,quantity,price) 
 	def insert_notDealt(self, inst):
 		if( self.InstNotDealt.has_key( inst[4] ) ):
 			self.InstNotDealt[ inst[4] ][ inst[0] ] = list(inst);
 		else:
-			self.InstNotDealt[inst[4]]={};
+			self.InstNotDealt[ inst[4]]={};
 			self.InstNotDealt[ inst[4] ][ inst[0] ] = list(inst);
 
 	def match(self, inst):
@@ -54,7 +55,7 @@ class GlobalVar(object):
 
 					# update instNotDealt map
 					self.InstNotDealt[ toMatch[4] ][ toMatch[0] ][6] = toMatch;
-					# update toMatchQueue
+					# aupdate toMatchQueue
 					toMatchQueue.update(toMatch, 0);
 
 				elif ( toMatch[6] < inst[6] ):
@@ -175,4 +176,45 @@ class GlobalVar(object):
 
 		inst = self.InstNotDealt[ inst[4] ].pop( inst[0] );
 		self.InstQueue.remove(instId);
+	
+	def flush(self,stockID): #clear and load
+		FrozeTime = datetime.datetime.now();
+		SellQueue = self.InstQueue[ inst[3] ][1];
+		BuyQueue = self.InstQueue[ inst[3] ][0];
+		
+		while ( not SellQueue.empty()):	
+			inst = SellQueue.get();
+			InstNotDealed.objects.create(
+				InstID=inst[0],
+				TimeSubmit=inst[1],
+				TimeOutOfDate=FrozeTime,
+				InstType=inst[2],
+				InstState=0;#0 is frozen;
+				StockID=inst[3],
+				AccountID=CapitalAccountInfo.objects.get(AccountID=inst[5]),
+				SecurityID=SecurityAccountInfo.objects.get(SecurityID=inst[4]),
+				Quantity=inst[6],
+				PriceSubmit=inst[7],
+				);
+		while ( not BuyQueue.empty()):	
+			inst = BuyQueue.get();
+			InstNotDealed.objects.create(
+				InstID=inst[0],
+				TimeSubmit=inst[1],
+				TimeOutOfDate=FrozeTime,
+				InstType=inst[2],
+				InstState=0;#0 is frozen;
+				StockID=inst[3],
+				AccountID=CapitalAccountInfo.objects.get(AccountID=inst[5]),
+				SecurityID=SecurityAccountInfo.objects.get(SecurityID=inst[4]),
+				Quantity=inst[6],
+				PriceSubmit=inst[7],
+				);
+		
+		self.InstNotDealt = {};
+			
+		
+			
+
+		
 
