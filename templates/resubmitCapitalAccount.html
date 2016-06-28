@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>User Account</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet" />
+    
+    
+    <link href="/static/css/font-awesome.css" rel="stylesheet" />
+    
+    <link href="/static/css/adminia.css" rel="stylesheet" /> 
+    <link href="/static/css/adminia-responsive.css" rel="stylesheet" /> 
+    
+    
+    <link href="/static/css/pages/plans.css" rel="stylesheet" /> 
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+	
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+
+<body>
+	
+<div class="navbar navbar-fixed-top">
+	
+	<div class="navbar-inner">
+		
+		<div class="container">
+			
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span> 				
+			</a>
+			
+			<a class="brand" href="./">Stock Manage System</a>
+			
+			<div class="nav-collapse">
+			
+				<ul class="nav pull-right">
+					<li>
+						<a href="#"><span class="badge badge-warning">7</span></a>
+					</li>
+					
+					<li class="divider-vertical"></li>
+					
+					<li class="dropdown">
+						
+						<a data-toggle="dropdown" class="dropdown-toggle " href="#">
+							User Account <b class="caret"></b>							
+						</a>
+						
+						<ul class="dropdown-menu">
+							<li>
+								<a href="/userAccount/openSecurityAccount/"><i class="icon-user"></i> Security Account </a>
+							</li>
+							
+							<li>
+								<a href="/userAccount/openCapitalAccount/"><i class="icon-user"></i> Capital Account</a>
+							</li>
+							
+							<li class="divider"></li>
+							
+							<li>
+								<a href="/userAccount/"><i class="icon-off"></i> Logout</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				
+			</div> <!-- /nav-collapse -->
+			
+		</div> <!-- /container -->
+		
+	</div> <!-- /navbar-inner -->
+	
+</div> <!-- /navbar -->
+
+
+
+
+<div id="content">
+	
+	<div class="container">
+		
+		<div class="row">
+			
+			<div class="span3">
+				
+				<div class="account-container">
+				
+					<div class="account-avatar">
+						<img src="/static/img/{{ img }}" alt="" class="thumbnail" />
+					</div> <!-- /account-avatar -->
+				
+					<div class="account-details">
+					
+						<span class="account-name">{{ name }}</span>
+						
+						<span class="account-role">{{ state }}</span>
+					
+					
+					</div> <!-- /account-details -->
+				
+				</div> <!-- /account-container -->
+				
+				<hr />
+				
+				<ul id="main-nav" class="nav nav-tabs nav-stacked">
+					
+					<li>
+						<a href="/userAccount/homepage/">
+							<i class="icon-home"></i>
+							Hoem Page 			
+						</a>
+					</li> 
+					
+					<li>
+						<a href="/userAccount/openCapitalAccount/">
+							<i class="icon-th-list"></i>
+							Open	
+						</a>
+					</li>
+					
+					<li>
+						<a href="/userAccount/reportCapitalLoss/">
+							<i class="icon-th-list"></i>
+							Report the Loss		
+						</a>
+					</li>
+					
+					<li class="active">
+						<a href="/userAccount/resubmitCapitalAccount/">
+							<i class="icon-th-list"></i>
+							Resubmit
+						</a>
+					</li>
+					
+					<li>
+						<a href="/userAccount/closeCapitalAccount/">
+							<i class="icon-th-list"></i>
+							Close an Account	
+						</a>
+					</li>
+					
+					<li>
+						<a href="/userAccount/changePassword/">
+							<i class="icon-th-list"></i>
+							Change Password							
+						</a>
+					</li>
+					
+					<li>
+						<a href="/userAccount/operation/">
+							<i class="icon-th-list"></i>
+							Operation	
+						</a>
+					</li>
+					
+				</ul>	
+				
+				
+				
+				<hr />
+				
+				<br />
+		
+			</div> <!-- /span3 -->
+			
+			
+			
+			<div class="span9">
+				
+				<h1 class="page-title">
+					<i class="icon-th-large"></i>
+					Capital Account					
+				</h1>
+				
+				
+				<div class="row">
+					
+					<div class="span9">
+				
+						<div class="widget">
+							
+							<div class="widget-header">
+								<h3>Basic Information</h3>
+							</div> <!-- /widget-header -->
+									
+							<div class="widget-content">
+								
+								
+								
+								<div class="tabbable">
+						
+						<br />
+						
+						
+								<form id="edit-profile" class="form-horizontal" method="post" action="/userAccount/resubmitCapitalAccount/"/>
+								{% csrf_token %}
+									<fieldset>
+										
+										<div class="control-group">											
+											<label class="control-label" for="Security ID">Security ID</label>
+											<div class="controls">
+												<input type="text" class="input-medium " id="Security ID" name="SecurityID" />
+											</div> <!-- /controls -->				
+										</div> <!-- /control-group -->
+										
+										
+										<div class="control-group">											
+											<label class="control-label" for="Capital ID">Capital ID</label>
+											<div class="controls">
+												<input type="text" class="input-medium" id="Capital ID" name="CapitalID"/>
+											</div> <!-- /controls -->				
+										</div> <!-- /control-group -->
+										
+										<div class="control-group">											
+											<label class="control-label" for="username">User Name</label>
+											<div class="controls">
+												<input type="text" class="input-medium" id="username" name="username"/>
+											</div> <!-- /controls -->				
+										</div> <!-- /control-group -->
+										
+										
+										<div class="control-group">											
+											<label class="control-label" for="IDcard">IDcard</label>
+											<div class="controls">
+												<input type="text" class="input-large" id="IDcard" name="IDcard"/>
+											</div> <!-- /controls -->				
+										</div> <!-- /control-group -->
+										
+										
+										<br />
+
+										<div class="control-group">											
+											<label class="control-label" for="password1">Login Password</label>
+											<div class="controls">
+												<input type="text" class="input-medium" id="password1" name="login_passwd"/>
+											</div> <!-- /controls -->				
+										</div> <!-- /control-group -->
+
+										
+										<div class="control-group">											
+											<label class="control-label" for="password2">Confirm</label>
+											<div class="controls">
+												<input type="password" class="input-medium" id="password2" name="confirm_loginPasswd"/>
+											</div> <!-- /controls -->				
+										</div> <!-- /control-group -->
+										
+										<br />
+										
+										<div class="control-group">											
+											<label class="control-label" for="password3">Transaction Password</label>
+											<div class="controls">
+												<input type="password" class="input-medium" id="password3" name="trans_passwd"/>
+											</div> <!-- /controls -->				
+										</div> <!-- /control-group -->
+										
+										<div class="control-group">											
+											<label class="control-label" for="password4">Confirm</label>
+											<div class="controls">
+												<input type="password" class="input-medium" id="password4" name="confirm_transPasswd"/>
+											</div> <!-- /controls -->				
+										</div> <!-- /control-group -->
+											
+											<br />
+										
+											
+										<div class="form-actions">
+											<button type="submit" class="btn btn-primary">Submit</button> 
+											<button class="btn">Cancel</button>
+										</div> <!-- /form-actions -->
+									</fieldset>
+								</form>
+							
+						  
+						</div>
+								
+								
+								
+								
+								
+								
+								
+								
+							</div> <!-- /widget-content -->
+							
+						</div> <!-- /widget -->
+						
+					</div> <!-- /span9 -->
+					
+				</div> <!-- /row -->
+			
+				
+				
+			</div> <!-- /span9 -->
+			
+			
+		</div> <!-- /row -->
+		
+	</div> <!-- /container -->
+	
+</div> <!-- /content -->
+					
+	
+<div id="footer">
+	
+	<div class="container">				
+		<hr />
+	
+	</div> <!-- /container -->
+	
+</div> <!-- /footer -->
+
+
+    
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/static/js/jquery-1.7.2.min.js"></script>
+
+<script type="text/javascript">
+	var message = '{{ result }}'
+	var tmp = 'initial'
+	if (message != tmp)
+		alert(message)
+</script>
+
+
+<script src="/static/js/bootstrap.js"></script>
+
+  </body>
+</html>

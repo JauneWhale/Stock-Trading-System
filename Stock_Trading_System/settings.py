@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'login',
     'database',
     'Transaction_Client',
+    'userAccount',
+    'central',
 ]
 
 MIDDLEWARE_CLASSES = [

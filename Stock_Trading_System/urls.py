@@ -18,7 +18,9 @@ from django.conf.urls import url
 from django.conf.urls.static import static
 from django.contrib import admin
 from Transaction_Client import views as Transaction_Client_views
-from central import views as central_views
+# from central import views as central_views
+from userAccount import views as userAccount_views
+
 urlpatterns = [
     url(r'^$', 'login.views.index', name='login'),
     #example
@@ -45,11 +47,42 @@ urlpatterns = [
  
 
     url(r'^TransactionClient/modipasswd/', Transaction_Client_views.modipasswd, name='modipasswd'),
-	#Central Trading System
-	#init
-	url(r'^init/',central_views.initial),
-	#InsertTest
-	url(r'^insert/',central_views.insert),
+	# #Central Trading System
+	# #init
+	# url(r'^init/',central_views.initial),
+	# #InsertTest
+	# url(r'^insert/',central_views.insert),
+
+
+
+
+    # user Account
+    url(r'^userAccount/$', userAccount_views.login, name = 'userAccount_login'),
+    # url(r'^userAccount/logout/', userAccount_views.logout, name = 'userAccount_logout'),
+
+    url(r'^userAccount/homepage/', userAccount_views.homepage, name='userAccount_homepage'),
+    #open
+    url(r'^userAccount/openSecurityAccount/', userAccount_views.openSA, name='userAccount_openSecurityAccount'),
+    url(r'^userAccount/openCapitalAccount/', userAccount_views.openCA, name='userAccount_openCapitalAccount'),
+
+    #report The Loss
+    url(r'^userAccount/reportSecurityLoss/', userAccount_views.reportSecurityLoss, name='userAccount_reportSecurityLoss'),
+    url(r'^userAccount/reportCapitalLoss/', userAccount_views.reportCapitalLoss, name='userAccount_reportCapitalLoss'),
+
+    #resubmit
+    url(r'^userAccount/resubmitSecurityAccount/', userAccount_views.resubmitSA, name='userAccount_resubmitSecurityAccount'),
+    url(r'^userAccount/resubmitCapitalAccount/', userAccount_views.resubmitCA, name='userAccount_resubmitCapitalAccount'),    
+
+    #close an account
+    url(r'^userAccount/closeSecurityAccount/', userAccount_views.closeSA, name='userAccount_closeSurityAccount'),
+    url(r'^userAccount/closeCapitalAccount/', userAccount_views.closeCA, name='userAccount_closeCapitalAccount'),
+
+    # operation  (deposit or withdraw)
+    url(r'^userAccount/operation/', userAccount_views.operation, name='userAccount_operation'),
+
+    # change password(include login password and transaction password)
+    url(r'^userAccount/changePassword/', userAccount_views.changePassword, name='userAccount_changePassword'),    
+     
 
 
 ]
