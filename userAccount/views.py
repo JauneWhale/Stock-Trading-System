@@ -19,7 +19,7 @@ class UserForm(forms.Form):
 	phone = forms.CharField(label='phone:',max_length=20)
 	gender = forms.IntegerField(label='gender:')
 	address = forms.CharField(max_length=20)
-	career = forms.CharField(label='career:',max_length=20)
+	occupation = forms.CharField(label='career:',max_length=20)
 	education = forms.CharField(label='education:',max_length=20)
 	company = forms.CharField(label='company:',max_length=20)
 	#IsFree = forms.CharField(label='IsFreeze:',max_length=20)
@@ -38,7 +38,7 @@ class CapForm(forms.Form):
 	phone = forms.CharField(label='phone:',max_length=20)
 	gender = forms.IntegerField(label='gender:')
 	address = forms.CharField(max_length=20)
-	career = forms.CharField(label='career:',max_length=20)
+	occupation = forms.CharField(label='career:',max_length=20)
 	education = forms.CharField(label='education:',max_length=20)
 	company = forms.CharField(label='company:',max_length=20)
 
@@ -136,7 +136,6 @@ def openSA(request):
 	message = ""
 	IsFreeze="1"
 
-	balance=0
 	CapitalID=""
 
 	context['result'] = 'initial'
@@ -171,25 +170,29 @@ def openSA(request):
 				tmp = 2
 				 #将表单写入数据库
 				user = UserTable()
-				user.SecurityID = SecurityID
+				security = SecurityAccountInfo()
+				# capitalInfo = CapitalInfo()
+
+				security.SecurityID = SecurityID
 				user.Name = name
 				user.IDcard = IDcard
-				user.Phone = phone
+				user.Tel = phone
 				user.Gender = gender
-				user.Address = address
-				user.Career = career
-				user.Education = education
-				user.Company = company
-				user.IsFreeze = 1
+				user.HomeAddr = address
+				user.Occupation = career
+				user.EduInfo = education
+				user.Department = company
+				security.IsFreeze=false
 				#user.StuffID="null"
 				#user.StuddName="null"
 				#user.password="null"
 				#user.AccountID="null"
-				user.Balance=0
-				#user.LoginPasswd="null"
+				# capitalInfo.ActiveMoney=0
+				#user.Passsword="null"
 				#user.BuyPassword="null"
 
 				user.save()
+				security.save()
 
 
 			if  tmp == 1 :
@@ -254,7 +257,7 @@ def  openCA(request):
 		if (SecurityID == "" or CapitalID == "" or username == "" or IDcard == "" or login_passwd== "" or confirm_loginPasswd == "" or trans_passwd == "" or confirm_transPasswd == "" ):
 			tmp = 1
 		else:
-			UserTable.objects.filter(SecurityID=SecurityID,IDcard=IDcard).update(AccountID=CapitalID,Balance=0,BuyPassword=trans_passwd,LoginPasswd=login_passwd,Username=username)
+			UserTable.objects.filter(SecurityID=SecurityID,IDcard=IDcard).update(AccountID=CapitalID,ActiveMoney=0,BuyPassword=trans_passwd,Password=login_passwd,Username=username)
 			tmp = 2
 
 		if  tmp == 1 :
@@ -319,7 +322,7 @@ def reportSecurityLoss(request):
 			dictTmp['password']="inital"
 			dictTmp['AccountID']="inital"
 			dictTmp['Balance']=0
-			dictTmp['LoginPasswd']="inital"
+			dictTmp['Password']="inital"
 			dictTmp['BuyPassword']="inital"
 			dictTmp['AccountID']="inital"
 			dictTmp['Username']="inital"
@@ -496,7 +499,7 @@ def resubmitSA(request):
 			dictTmp['password']="inital"
 			dictTmp['AccountID']="inital"
 			dictTmp['Balance']=0
-			dictTmp['LoginPasswd']="inital"
+			dictTmp['Password']="inital"
 			dictTmp['BuyPassword']="inital"
 			dictTmp['AccountID']="inital"
 			dictTmp['Username']="inital"
@@ -512,22 +515,25 @@ def resubmitSA(request):
 		 	   	 	tmp = 2
 
 			user = UserTable()
+			# Security = compSecurityAccountInfo()
+
+
 			user.SecurityID = SecurityID
 			user.Name = name
 			user.IDcard = IDcard
-			user.Phone = phone
+			user.Tel = phone
 			user.Gender = gender
-			user.Address = address
-			user.Career = career
-			user.Education = education
-			user.Company = company
+			user.HomeAddr = address
+			user.Occupation = career
+			user.EduInfo = education
+			user.Department = company
 			user.IsFreeze = 1
 			#user.StuffID="null"
 			#user.StuddName="null"
 			#user.password="null"
 			#user.AccountID="null"
-			user.Balance=0
-			#user.LoginPasswd="null"
+			user.ActiveMoney=0
+			#user.Password="null"
 			#user.BuyPassword="null"
 
 			user.save()
@@ -619,16 +625,16 @@ def resubmitCA(request):
 			user.SecurityID = SecurityID
 			user.Name = name
 			user.IDcard = IDcard
-			user.Phone = phone
+			user.Tel = phone
 			user.Gender = gender
-			user.Address = address
-			user.Career = career
-			user.Education = education
-			user.Company = company
+			user.HomeAddr = address
+			user.Occupation = career
+			user.EduInfo = education
+			user.Department = company
 			user.IsFreeze = 1
 			user.AccountID=CapitalID
-			user.Balance=0
-			user.LoginPasswd=login_passwd
+			user.ActiveMoney=0
+			user.Password=login_passwd
 			user.BuyPassword=trans_passwd
 
 			user.save()
@@ -697,7 +703,7 @@ def closeSA(request):
 			dictTmp['password']="inital"
 			dictTmp['AccountID']="inital"
 			dictTmp['Balance']=0
-			dictTmp['LoginPasswd']="inital"
+			dictTmp['Password']="inital"
 			dictTmp['BuyPassword']="inital"
 			dictTmp['AccountID']="inital"
 			dictTmp['Username']="inital"
@@ -897,7 +903,7 @@ def operation(request):#存取款
 					dictTmp['password']="inital"
 					dictTmp['AccountID']=CapitalID1
 					dictTmp['Balance']=balance1
-					dictTmp['LoginPasswd']="inital"
+					dictTmp['Password']="inital"
 					dictTmp['BuyPassword']=trans_passwd1
 					dictTmp['Username']=username1
 					dictTmp['IsFreeze']=1
@@ -927,7 +933,7 @@ def operation(request):#存取款
 							userTmp = userDataTMP[0]
 							if userTmp.compPasswdInfo(SecurityID1,IDcard1,CapitalID1):
 								balance1 += bbtmp
-								UserTable.objects.filter(SecurityID=SecurityID1,IDcard=IDcard1,AccountID=CapitalID1).update(Balance=balance1)
+								UserTable.objects.filter(SecurityID=SecurityID1,IDcard=IDcard1,AccountID=CapitalID1).update(ActiveMoney=balance1)
 								tmp = 3
 								#print userdatam
 								#UserTable.objects.filter(SecurityID=SecurityID1,IDcard=IDcard1,AccountID=CapitalID1).update(Balance=)
@@ -967,7 +973,7 @@ def operation(request):#存取款
 					dictTmp['password']="inital"
 					dictTmp['AccountID']=CapitalID2
 					dictTmp['Balance']=balance2
-					dictTmp['LoginPasswd']="inital"
+					dictTmp['Password']="inital"
 					dictTmp['BuyPassword']=trans_passwd2
 					dictTmp['Username']=username2
 					dictTmp['IsFreeze']=1
@@ -998,7 +1004,7 @@ def operation(request):#存取款
 								if balance2 < 0:
 									message = "没有足够的余额取出！"
 								else:
-									UserTable.objects.filter(SecurityID=SecurityID2,IDcard=IDcard2,AccountID=CapitalID2).update(Balance=balance2)
+									UserTable.objects.filter(SecurityID=SecurityID2,IDcard=IDcard2,AccountID=CapitalID2).update(ActiveMoney=balance2)
 									tmp = 3
 								#print userdatam
 								#UserTable.objects.filter(SecurityID=SecurityID1,IDcard=IDcard1,AccountID=CapitalID1).update(Balance=)
@@ -1127,7 +1133,7 @@ def changePassword(request):#改密码
 						dictTmp['password']="inital"
 						dictTmp['AccountID']=CapitalID1
 						dictTmp['Balance']=0
-						dictTmp['LoginPasswd']="inital"
+						dictTmp['Password']="inital"
 						dictTmp['BuyPassword']="inital"
 						dictTmp['Username']=username1
 						dictTmp['IsFreeze']="inital"
@@ -1138,7 +1144,7 @@ def changePassword(request):#改密码
 							if(len(userDataTMP)):
 								userTmp = userDataTMP[0]
 								if userTmp.compPasswdInfo(SecurityID1,IDcard1,CapitalID1):
-									UserTable.objects.filter(SecurityID=SecurityID1,IDcard=IDcard1,AccountID=CapitalID1).update(LoginPasswd=newLoginPasswd)
+									UserTable.objects.filter(SecurityID=SecurityID1,IDcard=IDcard1,AccountID=CapitalID1).update(Password=newLoginPasswd)
 									tmp = 4 
 
 
@@ -1170,7 +1176,7 @@ def changePassword(request):#改密码
 						dictTmp['password']="inital"
 						dictTmp['AccountID']=CapitalID2
 						dictTmp['Balance']=0
-						dictTmp['LoginPasswd']="inital"
+						dictTmp['Password']="inital"
 						dictTmp['BuyPassword']="inital"
 						dictTmp['Username']=username2
 						dictTmp['IsFreeze']="inital"

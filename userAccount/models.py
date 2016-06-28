@@ -8,25 +8,18 @@ from django.contrib import admin
 class UserTable(models.Model):
     # 证券账户基本信息
     # SecurityID = models.ForeignKey(SecurityAccountInfo)
-    SecurityID = models.CharField(max_length=20)
+    # SecurityID = models.CharField(max_length=20)
+    # UserID = models.CharField(max_length=20,primary_key=True)
     Name = models.CharField(max_length=20)
     IDcard = models.CharField(max_length=20)
-    Phone = models.CharField(max_length=20)
+    Tel = models.CharField(max_length=20)
     Gender = models.IntegerField()
-    Address = models.CharField(max_length=20)
-    Career = models.CharField(max_length=20)
-    Education = models.CharField(max_length=20)
-    Company = models.CharField(max_length=20)
-    IsFreeze=models.IntegerField()#是否冻结
-
-	# 资金账户基本信息
-    # AccountID = models.ForeignKey(CapitalAccountInfo)
-    AccountID = models.CharField(max_length=20)
-    Username=models.CharField(max_length=20)
-    Balance = models.FloatField(max_length=80)
-    LoginPasswd=models.CharField(max_length=20)
-    BuyPassword = models.CharField(max_length=20)#trans_passwd
-
+    HomeAddr = models.TextField(default="")
+    Occupation = models.CharField(max_length=20)
+    EduInfo = models.CharField(max_length=20)
+    Department = models.TextField(null=True)
+    MailAddr = models.CharField(max_length=30,default="")
+    Age = models.IntegerField(null=True)
 
 
     # date_joined = models.DateField()
@@ -43,7 +36,7 @@ class UserTable(models.Model):
 
     def compIDcard(self,IDcardtmp):
         return (self.IDcard == IDcardtmp)
-
+    
     def compphone(self,phonetmp):
         return (self.Phone == phonetmp)
 
@@ -56,9 +49,8 @@ class UserTable(models.Model):
     	else:
     		return False
    
-    def compSecurityAccount(self,SecurityIDtmp,nametmp,IDcardtmp,phonetmp):
-        # return False
-        if self.compSecurityID(SecurityIDtmp) and self.compname(nametmp) and self.compIDcard(IDcardtmp) and self.compphone(phonetmp):
+    def compPasswdInfo(self,SecurityIDtmp,IDcardtmp,AccountIDtmp):
+        if self.compSecurityID(SecurityIDtmp) and self.compIDcard(IDcardtmp) and self.compAccountID:
             return True
         else:
             return False
@@ -74,7 +66,7 @@ class UserTable(models.Model):
 
 class StaffTable(models.Model):
 	#员工表
-    StuffID=models.CharField(max_length=20)
+    StuffID=models.CharField(max_length=20,primary_key=True)
     StuddName=models.CharField(max_length=20)
     Password = models.CharField(max_length=20)
 
@@ -83,26 +75,36 @@ class StaffTable(models.Model):
         return (self.StuffID == StuffIDtmp)
 # 证券账户基本信息
 class SecurityAccountInfo(models.Model):
-    SecurityID = models.CharField(max_length=20)
+    SecurityID = models.CharField(max_length=20,primary_key=True)
+    IsFreeze=models.BooleanField(default=False)
 
 # 资金账户基本信息
 class CapitalAccountInfo(models.Model):
-    AccountID = models.CharField(max_length=20)
-    Password = models.CharField(max_length=20)
+    AccountID = models.CharField(max_length=20,primary_key=True) 
+    # Password = models.CharField(max_length=20)
+    Password=models.CharField(max_length=20)
     Isfirst = models.BooleanField(default=1)
     UserTable = models.ForeignKey(UserTable)
     BuyPassword = models.CharField(max_length=20)
     SecurityAccount = models.ForeignKey(SecurityAccountInfo)
     loginPwdWrongNum = models.IntegerField(default=0)
     transPwdWrongNum = models.IntegerField(default=0)
-    lastTimeTrans = models.DateTimeField()
-    lastTimeLogin = models.DateTimeField()
-    IsTransFreeze = models.BooleanField()
-    IsLoginFreeze = models.BooleanField()
+    lastTimeTrans = models.DateTimeField(null=True)
+    lastTimeLogin = models.DateTimeField(null=True)
+    IsTransFreeze = models.BooleanField(default=False)
+    IsLoginFreeze = models.BooleanField(default=False)
+
+# 资金信息
+class CapitalInfo(models.Model):
+    AccountID = models.ForeignKey(CapitalAccountInfo)
+    ActiveMoney = models.FloatField(default="")
+    # Balance = models.FloatField(max_length=80)
+    FrozenMoney = models.FloatField()
+    BankCard = models.CharField(max_length=20,null=True)
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('IDcard','SecurityID','AccountID','Name','Username','Phone','Gender','Address','Career','Education','Company','IsFreeze','BuyPassword','LoginPasswd','Balance')
+    list_display = ('Name','IDcard','Tel','Gender','HomeAddr','Occupation','EduInfo','Department','MailAddr','Age')
     
 admin.site.register(UserTable,UserAdmin)
 
