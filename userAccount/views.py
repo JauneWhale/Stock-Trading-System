@@ -29,20 +29,12 @@ class UserForm(forms.Form):
 class CapForm(forms.Form):
 	SecurityID = forms.CharField(label='SecurityID：',max_length=20)
 	CapitalID=forms.CharField(max_length=20)
-	username=forms.CharField(max_length=20)
+	# username=forms.CharField(max_length=20)
 	IDcard = forms.CharField(label='IDcard:',max_length=20)
-	#balance = forms.FloatField(label='余额：')
-	login_passwd=forms.CharField(max_length=20)
-	trans_passwd=forms.CharField(max_length=20)
-	confirm_loginPasswd=forms.CharField(max_length=20)
-	confirm_transPasswd=forms.CharField(max_length=20)
 	name = forms.CharField(label='用户名：',max_length=20)
-	phone = forms.CharField(label='phone:',max_length=20)
-	gender = forms.IntegerField(label='gender:')
-	address = forms.CharField(max_length=20)
-	occupation = forms.CharField(label='career:',max_length=20)
-	education = forms.CharField(label='education:',max_length=20)
-	company = forms.CharField(label='company:',max_length=20)
+	IsTransFreeze = models.BooleanField(default=False)
+	
+	
 
 class StuffForm(forms.Form):
 	StuffID=forms.CharField(max_length=20)
@@ -85,10 +77,17 @@ def login(request):
 
 			if sfData.is_valid():
 				sfDataTMP = StaffTable.objects.filter(StuffID=staffid)
-				if(len(sfDataTMP)):
-					sfTmp = sfDataTMP[0]
-					if sfTmp.compStuffID(staffid):
+				if len(sfDataTMP) != 0:
+					if staffid == sfDataTMP[0].StuffID and staffname == sfDataTMP[0].StuddName and password == sfDataTMP[0].Password:
 						tmp = 2
+					else:
+						tmp = 1
+
+
+				# if(len(sfDataTMP)):
+				# 	sfTmp = sfDataTMP[0]
+				# 	if sfTmp.compStuffID(staffid):
+				# 		tmp = 2
 
 
 		if  tmp == 1 :
@@ -255,14 +254,46 @@ def  openCA(request):
 	
 		if (SecurityID == "" or CapitalID == "" or username == "" or IDcard == "" or login_passwd== "" or confirm_loginPasswd == "" or trans_passwd == "" or confirm_transPasswd == "" ):
 			tmp = 1
+		elif len(login_passwd)<6:
+			tmp = 6
+		elif len(trans_passwd)<6:
+			tmp = 6
+		elif login_passwd != confirm_loginPasswd:
+			tmp = 4
+		elif trans_passwd != confirm_transPasswd:
+			tmp = 5
+
 		else:
-			UserTable.objects.filter(SecurityID=SecurityID,IDcard=IDcard).update(AccountID=CapitalID,ActiveMoney=0,BuyPassword=trans_passwd,Password=login_passwd,Username=username)
-			tmp = 2
+			# UserTable.objects.filter(SecurityID=SecurityID,IDcard=IDcard).update(AccountID=CapitalID,ActiveMoney=0,BuyPassword=trans_passwd,Password=login_passwd,Username=username)
+			ut = UserTable.objects.filter(IDcard=IDcard)
+			if len(ut)!=0:
+				sa = SecurityAccountInfo.objects.filter(SecurityID=SecurityID,IDcard=ut)
+				if len(sa)!=0:
+					tmp=2
+					newca = CapitalAccountInfo()
+					newca.AccountID = CapitalID
+					newca.Password = login_passwd
+					newca.UserTable = ut[0]
+					newca.SecurityAccount = sa[0]
+					newca.BuyPassword = trans_passwd
+					newca.save()
+				else:
+					tmp=3
+			else:
+				tmp=3
 
 		if  tmp == 1 :
 			message = "请将信息填写完整!"
 		if tmp == 2 :
 			message = "开通成功!"
+		if tmp == 3:
+			message = "不存在！"
+		if tmp == 4:
+			message = "两次输入的登录密码不一致！"
+		if tmp == 5:
+			message = "两次输入的交易密码不一致！"
+		if tmp == 6:
+			message = "密码的长度不够！"
 		# if tmp == 3:
 		# 	message = "开通失败！"
 		# 最好是返回失败的原因
@@ -282,7 +313,6 @@ def reportSecurityLoss(request):
 	# 标志位
 	tmp = ""
 
-	phone = ""
 	SecurityID = ""
 	name = ""
 	IDcard = ""
@@ -299,17 +329,15 @@ def reportSecurityLoss(request):
 			IDcard = request.POST[u'IDcard'].encode('utf-8')
 		if request.POST.has_key(u'name'):
 			name = request.POST[u'name'].encode('utf-8')
-		if request.POST.has_key(u'phone'):
-			phone = request.POST[u'phone'].encode('utf-8')
 
-		if phone == "" or SecurityID == "" or IDcard == "" or name=="":
+		if SecurityID == "" or IDcard == "" or name=="":
 			context['result'] = "请填写全部信息！"
 			return render(request, 'reportSecurityLoss.html',context)
 		else:
 			dictTmp['SecurityID'] = SecurityID
 			dictTmp['name'] = name
 			dictTmp['IDcard'] = IDcard
-			dictTmp['phone'] = phone
+			dictTmp['phone'] = "initial"
 			#以下均为临时数据
 			dictTmp['gender'] = "1"
 			dictTmp['address'] = "initial"
@@ -331,21 +359,20 @@ def reportSecurityLoss(request):
 			userData = UserForm(dictTmp)
 
 			if userData.is_valid():
-				userDataTMP = UserTable.objects.filter(SecurityID=SecurityID,IDcard=IDcard,IsFreeze__exact =1)
-				if(len(userDataTMP)):
-					userTmp = userDataTMP[0]
-					if userTmp.compSecurityAccount(SecurityID,name,IDcard,phone):
-						UserTable.objects.filter(SecurityID=SecurityID,IDcard=IDcard).update(IsFreeze=0)
-						print userDataTMP
-		 	   	 		print "success!"
-		 	   	 		context['result'] = "挂失成功！"
-						return render(request, 'reportSecurityLoss.html',context)
-		 	   	 	else:
-		 	   	 		context['result'] = "请输入正确的姓名和电话！"
-						return render(request, 'reportSecurityLoss.html',context)
+				ut = UserTable.objects.filter(IDcard=IDcard)
+
+				if len(ut)!=0:
+					sa = SecurityAccountInfo.objects.filter(SecurityID=SecurityID,IDcard=ut)
+					if len(sa)!=0:
+						if sa[0].IsFreeze==0:
+							sa.update(IsFreeze=1)
+							context['result'] = "挂失成功！"
+						else:
+							context['result'] = "该账户已挂失！"
+					else:
+						context['result'] = "未知错误1!"
 				else:
-					context['result'] = "并无对应的证券账户和资金账户！"
-					return render(request, 'reportSecurityLoss.html',context)
+					context['result'] = "未知错误2！"
 
 	return render(request, 'reportSecurityLoss.html', context)
 
@@ -365,6 +392,7 @@ def reportCapitalLoss(request):
 	CapitalID = ""
 	username = ""
 	IDcard = ""
+	IsTransFreeze=""
 
 	context['result'] = 'initial'
 	#用于存放生成信息的词典
@@ -381,48 +409,37 @@ def reportCapitalLoss(request):
 			CapitalID = request.POST[u'CapitalID'].encode('utf-8')
 
 		if CapitalID == "" or SecurityID == "" or IDcard == "" or username=="":
-			context['result'] = "请填写全部信息！"
+			context['result'] = "请将信息填写完整！"
 			return render(request, 'reportSecurityLoss.html',context)
 		else:
 			
 			dictTmp['SecurityID'] = SecurityID
 			dictTmp['IDcard'] = IDcard
-			dictTmp['username']=username
+			dictTmp['name']=username
 			dictTmp['CapitalID']=CapitalID
-			dictTmp['login_passwd']="inital"
-			dictTmp['trans_passwd']="inital"
-			dictTmp['confirm_loginPasswd']="inital"
-			dictTmp['confirm_transPasswd']="inital"
-			dictTmp['IsFreeze']=0
-			dictTmp['phone'] = "initial"
-			dictTmp['name'] = "initial"
-			dictTmp['gender'] = "1"
-			dictTmp['address'] = "initial"
-			dictTmp['career'] = "initial"
-			dictTmp['education'] = "initial"
-			dictTmp['company'] = "initial"
-
-
+			dictTmp['IsTransFreeze'] = True
+		
 
 			#创建临时数据
 			capData = CapForm(dictTmp)
 			print capData
 			if capData.is_valid():
-				capDataTMP = UserTable.objects.filter(SecurityID=SecurityID,IDcard=IDcard,AccountID=CapitalID)
-				if(len(capDataTMP)):
-					userTmp = capDataTMP[0]
-					if userTmp.compAccountID(CapitalID):
-						UserTable.objects.filter(SecurityID=SecurityID,IDcard=IDcard,AccountID=CapitalID).update(IsFreeze=00)
-						print capDataTMP
-						print "success!"
-		 	   	 		context['result'] = "挂失成功！"
-						return render(request, 'reportSecurityLoss.html',context)
-		 	   	 	else:
-		 	   	 		context['result'] = "请输入正确的信息！"
-						return render(request, 'reportSecurityLoss.html',context)
+				ut = UserTable.objects.filter(IDcard=IDcard)
+				if len(ut) != 0:
+					sa = SecurityAccountInfo.objects.filter(SecurityID=SecurityID,IDcard=ut[0])
+					if len(sa) != 0:
+						ca = CapitalAccountInfo.objects.filter(AccountID=CapitalID,SecurityAccount=sa[0],UserTable=ut[0])
+						if ca[0].IsTransFreeze == False:
+							ca.update(IsTransFreeze = True)
+							context['result'] = "该资金账户挂失成功！"
+						else:
+							context['result'] = "该资金账户已挂失！"
+					else:
+						context['result'] = "未知错误1!"
 				else:
-					context['result'] = "并无对应的证券账户和资金账户！"
-					return render(request, 'reportSecurityLoss.html',context)
+					context['result'] = "未知错误2!"
+			else:
+				context['result'] = "未知错误3!"
 
 		# if tmp == 3:
 		# 	message = "挂失失败"
@@ -452,7 +469,9 @@ def resubmitSA(request):
 	career = ""
 	education = ""
 	company = ""
+
 	IsFreeze="1"
+	# message = ""
 
 	context['result'] = 'initial'
 	#用于存放生成信息的词典
@@ -480,7 +499,7 @@ def resubmitSA(request):
 
 	
 		if (SecurityID == "" or name == "" or IDcard == "" or phone=="" or gender == "" or address == "" or career == "" or education == "" or company == ""):
-			tmp = 1
+			context['result'] = "请将信息填写完整！"
 		else:
 			
 			dictTmp['SecurityID'] = SecurityID
@@ -488,66 +507,33 @@ def resubmitSA(request):
 			dictTmp['IDcard'] = IDcard
 			dictTmp['phone'] = phone
 			#以下均为临时数据
-			dictTmp['gender'] = "1"
-			dictTmp['address'] = "initial"
-			dictTmp['career'] = "initial"
-			dictTmp['education'] = "initial"
-			dictTmp['company'] = "initial"
-			dictTmp['StuffID']="inital"
-			dictTmp['StuddName']="inital"
-			dictTmp['password']="inital"
-			dictTmp['AccountID']="inital"
-			dictTmp['Balance']=0
-			dictTmp['Password']="inital"
-			dictTmp['BuyPassword']="inital"
-			dictTmp['AccountID']="inital"
-			dictTmp['Username']="inital"
-			dictTmp['IsFreeze']="inital"
+			dictTmp['gender'] = gender
+			dictTmp['address'] = address
+			dictTmp['career'] = career
+			dictTmp['education'] = education
+			dictTmp['company'] = company
+			dictTmp['IsFreeze']=1
 
 			userData=UserForm(dictTmp)
+			print userData
+			# message = "IDcard不存在"
 			if userData.is_valid():
-				userDataTMP = UserTable.objects.filter(IDcard=IDcard)
-				if(len(userDataTMP)):
-					userTmp = userDataTMP[0]
-					userTmp.delete()
-		 	   	 	print "old delete success!"			#将表单写入数据库
-		 	   	 	tmp = 2
-
-			user = UserTable()
-			# Security = compSecurityAccountInfo()
-
-
-			user.SecurityID = SecurityID
-			user.Name = name
-			user.IDcard = IDcard
-			user.Tel = phone
-			user.Gender = gender
-			user.HomeAddr = address
-			user.Occupation = career
-			user.EduInfo = education
-			user.Department = company
-			user.IsFreeze = 1
-			#user.StuffID="null"
-			#user.StuddName="null"
-			#user.password="null"
-			#user.AccountID="null"
-			user.ActiveMoney=0
-			#user.Password="null"
-			#user.BuyPassword="null"
-
-			user.save()
+				ut = UserTable.objects.filter(IDcard=IDcard)
+				if len(ut) != 0:
+					sa = SecurityAccountInfo.objects.get(IDcard=ut[0])
+					sa.delete()
+					sa.SecurityID = SecurityID
+					sa.save()
+					context['result'] = "补办成功！"
+					# else:
+					# 	context['result'] = "补1111111！"
+				else:
+					context['result'] = "补111111！"
+			else:
+				context['result'] = "补11111！"
 
 
-		if  tmp == 1 :
-			message = "请将信息填写完整！ "
-		if tmp == 2 :
-			message = "补办成功！"
-		# if tmp == 3:
-		# 	message = "开通失败！"
-		# 最好是返回失败的原因
-
-		context['result'] = message
-
+		# context['result'] = message
 	return render(request, 'resubmitSecurityAccount.html', context)
 
 @csrf_exempt
@@ -592,61 +578,10 @@ def resubmitCA(request):
 
 	
 		if (SecurityID == "" or CapitalID == "" or username == "" or IDcard == "" or login_passwd== "" or confirm_loginPasswd == "" or trans_passwd == "" or confirm_transPasswd == "" ):
-			tmp = 1
+			context['result'] = "请将信息填写完整！"
 		else:
-			dictTmp['SecurityID'] = SecurityID
-			dictTmp['IDcard'] = IDcard
-			dictTmp['username']="inital"
-			dictTmp['CapitalID']=CapitalID
-			dictTmp['login_passwd']="inital"
-			dictTmp['trans_passwd']="inital"
-			dictTmp['confirm_loginPasswd']="inital"
-			dictTmp['confirm_transPasswd']="inital"
-			dictTmp['IsFreeze']=0
-			dictTmp['phone'] = phone
-			dictTmp['name'] = name
-			dictTmp['gender'] = "1"
-			dictTmp['address'] = "initial"
-			dictTmp['career'] = "initial"
-			dictTmp['education'] = "initial"
-			dictTmp['company'] = "initial"
-			#创建临时数据
-			capData = CapForm(dictTmp)
-			if capData.is_valid():
-				capDataTMP = UserTable.objects.filter(IDcard=IDcard)
-				if(len(capDataTMP)):
-					userTmp = capDataTMP[0]
-					userTmp.delete()
-					print "old delete success!"			#将表单写入数据库
-					tmp = 2
-
-			user = UserTable()
-			user.SecurityID = SecurityID
-			user.Name = name
-			user.IDcard = IDcard
-			user.Tel = phone
-			user.Gender = gender
-			user.HomeAddr = address
-			user.Occupation = career
-			user.EduInfo = education
-			user.Department = company
-			user.IsFreeze = 1
-			user.AccountID=CapitalID
-			user.ActiveMoney=0
-			user.Password=login_passwd
-			user.BuyPassword=trans_passwd
-
-			user.save()
-
-
-		if  tmp == 1 :
-			message = "请将信息填写完整!"
-		if tmp == 2 :
-			message = "补办成功!"
-		# if tmp == 3:
-		# 	message = "补办失败！"
-		# 最好是返回失败的原因
-		context['result'] = message
+			
+			context['result']="没有权限！"
 
 	return render(request, 'resubmitCapitalAccount.html', context)
 
@@ -701,34 +636,32 @@ def closeSA(request):
 			dictTmp['StuddName']="inital"
 			dictTmp['password']="inital"
 			dictTmp['AccountID']="inital"
-			dictTmp['Balance']=0
+			# dictTmp['Balance']=0
 			dictTmp['Password']="inital"
 			dictTmp['BuyPassword']="inital"
 			dictTmp['AccountID']="inital"
-			dictTmp['Username']="inital"
-			dictTmp['IsFreeze']="inital"
+			# dictTmp['Username']="inital"
+			dictTmp['IsFreeze']=0
 			print "test1"
 
 			#创建临时数据
 			userData = UserForm(dictTmp)
 			print userData
 			if userData.is_valid():
-				userDataTMP = UserTable.objects.filter(SecurityID=SecurityID,IDcard=IDcard)
-				print "test2"
-				if(len(userDataTMP)):
-					userTmp = userDataTMP[0]
-					print "test3"
-					if userTmp.compSecurityAccount(SecurityID,name,IDcard,phone):
-						userTmp.delete()
-		 	   	 		print "success!"
-		 	   	 		context['result'] = "删除成功！"
-						return render(request, 'closeSecurityAccount.html',context)
-		 	   	 	else:
-		 	   	 		context['result'] = "请输入正确的姓名和电话！"
-						return render(request, 'closeSecurityAccount.html',context)
+				ut = UserTable.objects.filter(IDcard=IDcard)
+				if len(ut) != 0:
+					sa = SecurityAccountInfo.objects.filter(SecurityID=SecurityID,IDcard=ut[0])
+					if len(sa) != 0:
+						CapitalAccountInfo.objects.filter(UserTable=ut[0], SecurityAccount=sa[0]).delete()
+						sa.delete()
+						ut.delete()
+						context['result'] = "注销账户成功！"
+					else:
+						context['result'] = "未知错误1！"
 				else:
-					context['result'] = "并无对应的证券账户和资金账户！"
-					return render(request, 'closeSecurityAccount.html',context)
+						context['result'] = "未知错误2！"
+			else:
+				context['result'] = "未知错误3！"
 
 	return render(request, 'closeSecurityAccount.html',context)
 
@@ -746,6 +679,7 @@ def closeCA(request):
 	SecurityID = ""
 	CapitalID = ""
 	username = ""
+	message= ""
 	IDcard = ""
 	
 	context['result'] = 'initial'
@@ -763,44 +697,42 @@ def closeCA(request):
 			username = request.POST[u'username'].encode('utf-8')
 
 		if SecurityID == "" or CapitalID == "" or username=="" or IDcard == "":
-			tmp=1
+			context['result'] = "请将信息填写完整！"
 		else:
 			dictTmp['SecurityID'] = SecurityID
 			dictTmp['IDcard'] = IDcard
-			dictTmp['username']="inital"
+            # dictTmp['username']="inital"
 			dictTmp['CapitalID']=CapitalID
-			dictTmp['login_passwd']="inital"
-			dictTmp['trans_passwd']="inital"
-			dictTmp['confirm_loginPasswd']="inital"
-			dictTmp['confirm_transPasswd']="inital"
-			dictTmp['IsFreeze']=0
-			dictTmp['phone'] = "initial"
-			dictTmp['name'] = "initial"
-			dictTmp['gender'] = "1"
-			dictTmp['address'] = "initial"
-			dictTmp['career'] = "initial"
-			dictTmp['education'] = "initial"
-			dictTmp['company'] = "initial"
+			dictTmp['name'] = username
+			# dictTmp['trans_passwd']="inital"
+			# dictTmp['login_passwd']="inital"
+			# dictTmp['loginPwdWrongNum']="inital"
+			# dictTmp['transPwdWrongNum']="inital"
+			# dictTmp['lastTimeTrans']="inital"
+			# dictTmp['lastTimeLogin']="inital"
+			# dictTmp['IsTransFreeze']="inital"
+			# dictTmp['IsLoginFreeze']="inital"
+			# dictTmp['Isfirst']="inital"
+			
 			#创建临时数据
 			capData = CapForm(dictTmp)
 			print capData
 			if capData.is_valid():
-				capDataTMP = UserTable.objects.filter(SecurityID=SecurityID,IDcard=IDcard,AccountID=CapitalID)
-				if(len(capDataTMP)):
-					userTmp = capDataTMP[0]
-					if userTmp.compPasswdInfo(SecurityID,IDcard,CapitalID):
-						userTmp.delete()
-						tmp=2
+				ut = UserTable.objects.filter(IDcard=IDcard)
+				if len(ut) != 0 :
+					sa = SecurityAccountInfo.objects.filter(SecurityID=SecurityID,IDcard=ut[0])
+					if len(sa) != 0:
+						ca = CapitalAccountInfo.objects.filter(AccountID=CapitalID,SecurityAccount=sa[0],UserTable=ut[0])
+						if len(ca) != 0:
+							ca.delete()
+							context['result'] = "资金账户注销成功！"
+					else:
+						context['result'] = "未知错误1！"
+				else:
+					context['result'] = "未知错误2！"
+			else:
+				context['result'] = "未知错误3！"
 
-		if tmp == 1:
-			message = "请将信息填写完整！"
-		if tmp == 2:
-			message = "注销成功！"
-		# if tmp == 3:
-		# 	message = "注销失败！"
-		# 最好是返回失败的原因
-
-		context['result'] = message
 
 	return render(request, 'closeCapitalAccount.html', context)
 
@@ -878,160 +810,87 @@ def operation(request):#存取款
 		
 		if opera == 1:
 			if SecurityID1 == "" or CapitalID1 == "" or username1 =="" or IDcard1 == "" or balance1 == "" or trans_passwd1 == "" or confirm_transPasswd1 == "":
-				tmp = 1
+				context['result']="请将信息填写完整1！"
 			else:
 				if trans_passwd1 != confirm_transPasswd1:
-					tmp = 2
+					context['result']="两次输入的交易密码不一致1！"
+			
+				else:
+					dictTmp['SecurityID'] = SecurityID1
+					dictTmp['name'] = username1
+					dictTmp['IDcard'] = IDcard1
+					dictTmp['phone'] = "initial"
+					dictTmp['IsTransFreeze']=True
+					dictTmp['CapitalID']=CapitalID1
+
+					#创建临时数据
+					userData = CapForm(dictTmp)
+					print userData
+					if userData.is_valid():
+						ut = UserTable.objects.filter(IDcard=IDcard1)
+						if len(ut) != 0:
+							sa = SecurityAccountInfo.objects.filter(SecurityID=SecurityID1,IDcard=ut[0])
+							if len(sa) != 0:
+								ca = CapitalAccountInfo.objects.filter(AccountID=CapitalID1,SecurityAccount=sa[0],UserTable=ut[0])
+								if len(ca) != 0:
+									if ca[0].IsTransFreeze == True:
+										context['result'] = "该资金账户已被锁定！无法进行交易！"
+									else:
+										ci = CapitalInfo.objects.get(AccountID=ca[0])
+										ci.ActiveMoney = ci.ActiveMoney + float(balance1)
+										ci.save()
+										context['result'] = "存款成功！"
+								else:
+									context['result'] = "hahahah111！"
+							else:
+								context['result'] = "22222！"
+						else:
+							context['result'] = "2333332！"
+					else:
+						context['result'] = "存4444！"
+
+					
+		
+		if opera == 2:
+			if SecurityID2 == "" or CapitalID2 == "" or username2 =="" or IDcard2 == "" or balance2 == "" or trans_passwd2 == "" or confirm_transPasswd2 == "":
+				context['result']="请将信息填写完整2！"
+			else:
+				if trans_passwd2 != confirm_transPasswd2:
+					context['result']="两次输入的交易密码不一致2！"
 				# 此处加入代码
 				# 判断输入的balance 和数据库中资金账户的余额
 				# 做出判断
 				# 给出相应的提示信息
 				else:
-					dictTmp['SecurityID'] = SecurityID1
-					dictTmp['name'] = "initial"
-					dictTmp['IDcard'] = IDcard1
-					dictTmp['phone'] = "initial"
-					#以下均为临时数据
-					dictTmp['gender'] = "1"
-					dictTmp['address'] = "initial"
-					dictTmp['career'] = "initial"
-					dictTmp['education'] = "initial"
-					dictTmp['company'] = "initial"
-					dictTmp['StuffID']="inital"
-					dictTmp['StuddName']="inital"
-					dictTmp['password']="inital"
-					dictTmp['AccountID']=CapitalID1
-					dictTmp['Balance']=balance1
-					dictTmp['Password']="inital"
-					dictTmp['BuyPassword']=trans_passwd1
-					dictTmp['Username']=username1
-					dictTmp['IsFreeze']=1
-					#创建临时数据
-					userData = UserForm(dictTmp)
-					if userData.is_valid():
-						#useru=UserTable.objects.all()
-						#print useru
-	
-						#bbtmp= UserTable.objects.get(SecurityID=SecurityID1).values('Balance')
-						#u_dict = model_to_dict(bbtmp) 
-						us=UserTable()
-						bbtmp=UserTable.objects.filter(SecurityID=SecurityID1).values("Balance")
-
-
-						aa=UserTable.objects.filter(SecurityID=SecurityID1).values_list("Balance")
-						 
-				
-						print type(bbtmp)
-						print type(aa)
-						print bbtmp
-						print aa
-						print "-----------------------------"
-
-						userDataTMP = UserTable.objects.filter(SecurityID=SecurityID1,IDcard=IDcard1,AccountID=CapitalID1)
-						if(len(userDataTMP)):
-							userTmp = userDataTMP[0]
-							if userTmp.compPasswdInfo(SecurityID1,IDcard1,CapitalID1):
-								balance1 += bbtmp
-								UserTable.objects.filter(SecurityID=SecurityID1,IDcard=IDcard1,AccountID=CapitalID1).update(ActiveMoney=balance1)
-								tmp = 3
-								#print userdatam
-								#UserTable.objects.filter(SecurityID=SecurityID1,IDcard=IDcard1,AccountID=CapitalID1).update(Balance=)
-								#print userDataTMP
-								#addtmp=userDataTMP.objects.get(Balance)
-								#if(addtmp >=balance1):
-								#	addtmp={{addtmp|add:-balance1}}
-								#	addtmp.save()
-								#	print addtmp
-							else:
-								message="存款失败！"
-					
-		
-		if opera == 2:
-			if SecurityID2 == "" or CapitalID2 == "" or username2 =="" or IDcard2 == "" or balance2 == "" or trans_passwd2 == "" or confirm_transPasswd2 == "":
-				tmp = 4
-			else:
-				if trans_passwd2 != confirm_transPasswd2:
-					tmp = 5
-				# 此处加入代码
-				# 判断输入的balance 和数据库中资金账户的余额
-				# 做出判断
-				# 给出相应的提示信息
-				else :
 					dictTmp['SecurityID'] = SecurityID2
-					dictTmp['name'] = "initial"
+					dictTmp['name'] = username2
 					dictTmp['IDcard'] = IDcard2
 					dictTmp['phone'] = "initial"
-					#以下均为临时数据
-					dictTmp['gender'] = "1"
-					dictTmp['address'] = "initial"
-					dictTmp['career'] = "initial"
-					dictTmp['education'] = "initial"
-					dictTmp['company'] = "initial"
-					dictTmp['StuffID']="inital"
-					dictTmp['StuddName']="inital"
-					dictTmp['password']="inital"
-					dictTmp['AccountID']=CapitalID2
-					dictTmp['Balance']=balance2
-					dictTmp['Password']="inital"
-					dictTmp['BuyPassword']=trans_passwd2
-					dictTmp['Username']=username2
-					dictTmp['IsFreeze']=1
+					dictTmp['IsTransFreeze']=True
+					dictTmp['CapitalID']=CapitalID2
+
 					#创建临时数据
-					userData = UserForm(dictTmp)
+					userData = CapForm(dictTmp)
 					if userData.is_valid():
-						#useru=UserTable.objects.all()
-						#print useru
-	
-						#bbtmp= UserTable.objects.get(SecurityID=SecurityID1).values('Balance')
-						#u_dict = model_to_dict(bbtmp) 
-						us=UserTable()
-						bbtmp=UserTable.objects.filter(SecurityID=SecurityID1).values("Balance")
+						ut = UserTable.objects.filter(IDcard=IDcard2)
+						if len(ut) != 0:
+							sa = SecurityAccountInfo.objects.filter(SecurityID=SecurityID2,IDcard=ut[0])
+							if len(sa) != 0:
+								ca = CapitalAccountInfo.objects.filter(AccountID=CapitalID2,SecurityAccount=sa[0],UserTable=ut[0])
+								if len(ca) != 0:
+									if ca[0].IsTransFreeze == True:
+										context['result'] = "该资金账户已被锁定！无法进行交易！"
+									else:
+										ci = CapitalInfo.objects.get(AccountID=ca[0])
+										if ci.ActiveMoney < float(balance2):
+											context['result'] = "余额不足！"
+										else:
+											ci.ActiveMoney = ci.ActiveMoney - float(balance2)
+											ci.save()
+											context['result'] = "取款成功！"
 
-						# aa=UserTable.objects.filter(SecurityID=SecurityID1).values_list("Balance")
-						# int(aa)
-						print type(bbtmp)
-						# print type(aa)
-						print bbtmp
-						# print aa
-						print "-----------------------------"
-
-						userDataTMP = UserTable.objects.filter(SecurityID=SecurityID2,IDcard=IDcard2,AccountID=CapitalID2)
-						if(len(userDataTMP)):
-							userTmp = userDataTMP[0]
-							if userTmp.compPasswdInfo(SecurityID2,IDcard2,CapitalID2):
-								balance2 -= bbtmp
-								if balance2 < 0:
-									message = "没有足够的余额取出！"
-								else:
-									UserTable.objects.filter(SecurityID=SecurityID2,IDcard=IDcard2,AccountID=CapitalID2).update(ActiveMoney=balance2)
-									tmp = 3
-								#print userdatam
-								#UserTable.objects.filter(SecurityID=SecurityID1,IDcard=IDcard1,AccountID=CapitalID1).update(Balance=)
-								#print userDataTMP
-								#addtmp=userDataTMP.objects.get(Balance)
-								#if(addtmp >=balance1):
-								#	addtmp={{addtmp|add:-balance1}}
-								#	addtmp.save()
-								#	print addtmp
-							else:
-								message="取款失败！"
-				
-		if tmp == 1:
-		 	message = "请将信息填写完整1 ！"
-		if tmp == 2:
-		 	message = "两次输入的交易密码不一致1 ！"
-		if tmp == 3:
-			message = "存款成功！"
-		
-		if tmp == 4:
-		 	message = "请将信息填写完整2 ！"
-		if tmp == 5:
-		 	message = "两次输入的交易密码不一致2 ！"
-		if tmp == 6:
-		 	message = "取款成功！"
-
-		context['result'] = message
 	return render(request, 'operation.html', context)
+
 
 @csrf_exempt
 def changePassword(request):#改密码
@@ -1041,8 +900,6 @@ def changePassword(request):#改密码
 	context['img'] = request.session.get('sessionimage',default=None)
 	request.encoding='utf-8'
 
-	# 标志位
-	tmp="" #给出提示
 
 	psswd = "" #判断是login 还是transaction
 
@@ -1063,7 +920,8 @@ def changePassword(request):#改密码
 	oldTransPasswd = ""
 	newTransPasswd = ""
 	confirm_transPasswd = ""
-	message = ""
+
+	# message = ""
 
 	context['result'] = 'initial'
 		#用于存放生成信息的词典
@@ -1109,128 +967,97 @@ def changePassword(request):#改密码
 
 		if passwd == 1:
 			if SecurityID1 == "" or CapitalID1 == "" or username1 == "" or IDcard1 == "" or oldLoginPasswd == "" or newLoginPasswd =="" or confirm_loginPasswd =="":
-				tmp = 1
+				context['result'] = "请将信息填写完整1！"
 			else :
 				if oldLoginPasswd == newLoginPasswd:
-					tmp = 2
-				if newLoginPasswd != confirm_loginPasswd:
-					tmp = 3
-				if oldLoginPasswd != newLoginPasswd:
-					if newLoginPasswd == confirm_loginPasswd:
+					context['result'] = "新旧登录密码一致！"
+				else:
+					if newLoginPasswd != confirm_loginPasswd:
+						context['result'] = "两次输入的登录密码不一致！"
+					else:
 						dictTmp['SecurityID'] = SecurityID1
-						dictTmp['name'] = "inital"
+						dictTmp['name'] = username1
 						dictTmp['IDcard'] = IDcard1
-						dictTmp['phone'] = "inital"
+						dictTmp['phone'] = "initial"
 						#以下均为临时数据
 						dictTmp['gender'] = "1"
 						dictTmp['address'] = "initial"
 						dictTmp['career'] = "initial"
 						dictTmp['education'] = "initial"
 						dictTmp['company'] = "initial"
-						dictTmp['StuffID']="inital"
-						dictTmp['StuddName']="inital"
-						dictTmp['password']="inital"
 						dictTmp['AccountID']=CapitalID1
-						dictTmp['Balance']=0
 						dictTmp['Password']="inital"
 						dictTmp['BuyPassword']="inital"
-						dictTmp['Username']=username1
-						dictTmp['IsFreeze']="inital"
+						dictTmp['IsFreeze']=1
+
 						#创建临时数据
 						userData = UserForm(dictTmp)
 						if userData.is_valid():
-							userDataTMP = UserTable.objects.filter(SecurityID=SecurityID1,IDcard=IDcard1,AccountID=CapitalID1)
-							if(len(userDataTMP)):
-								userTmp = userDataTMP[0]
-								if userTmp.compPasswdInfo(SecurityID1,IDcard1,CapitalID1):
-									UserTable.objects.filter(SecurityID=SecurityID1,IDcard=IDcard1,AccountID=CapitalID1).update(Password=newLoginPasswd)
-									tmp = 4 
+							ut = UserTable.objects.filter(IDcard=IDcard1)
+							if len(ut) != 0 :
+								sa = SecurityAccountInfo.objects.filter(SecurityID=SecurityID1,IDcard=ut[0])
+								if len(sa) !=0 :
+									ca = CapitalAccountInfo.objects.filter(AccountID=CapitalID1,SecurityAccount=sa[0],UserTable=ut[0])
+									if len(ca) != 0:
+										ca.update(Password=newLoginPasswd)
+										context['result'] = "登录密码修改成功！"
+									else:
+										context['result'] = "登录密码修改失败！"
+								else:
+									context['result'] = "未知错误1！"
+							else:
+								context['result'] = "未知错误2！"
+						else:
+							context['result'] = "未知错误3！"
 
-
-						
 
 
 		if passwd == 2:
 			if SecurityID2 == "" or CapitalID2 == "" or username2 == "" or IDcard2 == "" or oldTransPasswd == "" or newTransPasswd =="" or confirm_transPasswd =="":
-				tmp = 5
+				context['result'] = "请将信息填写完整2！"
 			else :
 				if oldTransPasswd == newTransPasswd:
-					tmp = 6
-				if newTransPasswd == confirm_transPasswd:
-					tmp = 7
-				if oldTransPasswd != newTransPasswd:  
-					if newTransPasswd == confirm_transPasswd:
+					context['result'] = "新旧交易密码一致！"
+				else: 
+					if newTransPasswd != confirm_transPasswd:
+						context['result'] = "两次输入的交易密码不一致！"
+					else:
 						dictTmp['SecurityID'] = SecurityID2
-						dictTmp['name'] = "inital"
+						dictTmp['name'] = username2
 						dictTmp['IDcard'] = IDcard2
-						dictTmp['phone'] = "inital"
+						dictTmp['phone'] = "initial"
 						#以下均为临时数据
 						dictTmp['gender'] = "1"
 						dictTmp['address'] = "initial"
 						dictTmp['career'] = "initial"
 						dictTmp['education'] = "initial"
 						dictTmp['company'] = "initial"
-						dictTmp['StuffID']="inital"
-						dictTmp['StuddName']="inital"
-						dictTmp['password']="inital"
 						dictTmp['AccountID']=CapitalID2
-						dictTmp['Balance']=0
 						dictTmp['Password']="inital"
 						dictTmp['BuyPassword']="inital"
-						dictTmp['Username']=username2
-						dictTmp['IsFreeze']="inital"
+						dictTmp['IsFreeze']=1
+
 						#创建临时数据
 						userData = UserForm(dictTmp)
 						if userData.is_valid():
-							userDataTMP = UserTable.objects.filter(SecurityID=SecurityID2,IDcard=IDcard2,AccountID=CapitalID2)
-							if(len(userDataTMP)):
-								userTmp = userDataTMP[0]
-								if userTmp.compPasswdInfo(SecurityID2,IDcard2,CapitalID2):
-									UserTable.objects.filter(SecurityID=SecurityID2,IDcard=IDcard2,AccountID=CapitalID2).update(BuyPassword=newTransPasswd)
-									tmp = 8
-						
-		print SecurityID1
-		print CapitalID1
-		print username1
-		print IDcard1
-		print oldLoginPasswd
-		print newLoginPasswd
-		print confirm_loginPasswd
-
-		print SecurityID2
-		print CapitalID2
-		print username2
-		print IDcard2
-		print oldTransPasswd
-		print newTransPasswd
-		print confirm_transPasswd
+							ut = UserTable.objects.filter(IDcard=IDcard2)
+							if len(ut) != 0 :
+								sa = SecurityAccountInfo.objects.filter(SecurityID=SecurityID2,IDcard=ut[0])
+								if len(sa) !=0 :
+									ca = CapitalAccountInfo.objects.filter(AccountID=CapitalID2,SecurityAccount=sa[0],UserTable=ut[0])
+									if len(ca) != 0:
+										ca.update(BuyPassword=newTransPasswd)
+										context['result'] = "交易密码修改成功！"
+									else:
+										context['result'] = "交易密码修改失败！"
+								else:
+									context['result'] = "未知错误1！"
+							else:
+								context['result'] = "未知错误2！"
+						else:
+							context['result'] = "未知错误3！"
 
 
-		if tmp == 1:
-			message = "请将信息填写完整1 ！"
-		if tmp == 2:
-			message = "旧登录密码和新登录密码一致！"
-		if tmp == 3:
-			message = "两次输入的登录密码不一致1 ！"
-		if tmp == 4:
-			message = "登录密码修改成功！"
-		
-		# print tmp
-		# print newTransPasswd
-		# print confirm_transPasswd
-	
-
-		if tmp == 5:
-			message = "请将信息填写完整2 ！"
-		if tmp == 6:
-			message = "旧交易密码和新交易密码一致！"
-		if tmp == 7:
-			message = "两次输入的交易密码不一致2 ！"
-		if tmp == 8:
-			message = "交易密码修改成功！"
-
-
-		context['result'] = message
 
 	return render(request, 'changePassword.html', context)
 
