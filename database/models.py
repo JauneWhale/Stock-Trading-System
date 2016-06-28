@@ -76,6 +76,7 @@ class StockInfo(models.Model):
 	Quantity = models.IntegerField() # 数量
 	UpLimit = models.FloatField() # 涨幅
 	BottomLimit = models.FloatField() # 跌幅
+	State = models.BooleanField() #1:Frozen 0:OK
 	
 
 # 资金信息
