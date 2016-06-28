@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from Transaction_Client import functions
 from django.http import HttpResponse
+from django.utils import timezone
+from central import interface
 import datetime
 
 # Create your views here.
@@ -267,7 +269,10 @@ def purchase_stock(request):
 	res = functions.checkBuying(buyingInfo)
 	print res
 	response = HttpResponse()
+	securityID = functions.getSecurityAccountID(username)
 	if(res == 0):
+		inst=(0,timezone.now(),0,stockID,securityID,username,int(PurchaseAmount),float(PurchasePrice))
+		interface.buy(inst)
 		response.write('<html><script type="text/javascript">alert("Submit Success!");window.location="/TransactionClient/purchase/"</script></html>')
 		return response
 	if(res == -1):
@@ -280,12 +285,15 @@ def purchase_stock(request):
 		response.write('<html><script type="text/javascript">alert("System Error!");window.location="/TransactionClient/purchase/"</script></html>')
 		return response
 	if(res == -8):
-		response.write('<html><script type="text/javascript">alert("Wrong Transaction Password!");window.location="/TransactionClient/purchase/"</script></html>')
-		return response
-	if(res == -32):
-		response.write('<html><script type="text/javascript">alert("Account will be frozen for inputting wrong passwords too many times!");window.location="/TransactionClient/purchase/"</script></html>')
+		response.write('<html><script type="text/javascript">alert("Stock is Frozen!");window.location="/TransactionClient/purchase/"</script></html>')
 		return response
 	if(res == -16):
+		response.write('<html><script type="text/javascript">alert("Wrong Transaction Password!");window.location="/TransactionClient/purchase/"</script></html>')
+		return response
+	if(res == -64):
+		response.write('<html><script type="text/javascript">alert("Account will be frozen for inputting wrong passwords too many times!");window.location="/TransactionClient/purchase/"</script></html>')
+		return response
+	if(res == -32):
 		del request.session['ID']
 		response.write('<html><script type="text/javascript">alert("Accout Frozen!");window.location="/TransactionClient/"</script></html>')
 		return response
@@ -313,8 +321,11 @@ def sell_stock(request):
 	username = request.session.get('ID', default=None)
 	SalingInfo = {'userID':username, 'stockID': stockID, 'Price':sellPrice, 'num':sellAmount, 'TransPwd': TransPwd}
 	res = functions.checkSaling(SalingInfo)
+	securityID = functions.getSecurityAccountID(username)
 	response = HttpResponse()
 	if(res == 0):
+		inst=(0,timezone.now(),1,stockID,securityID,username,int(sellAmount),float(sellPrice))
+		interface.sell(inst)
 		response.write('<html><script type="text/javascript">alert("Submit!");window.location="/TransactionClient/sell/"</script></html>')
 		return response
 	if(res == -1):
@@ -323,16 +334,19 @@ def sell_stock(request):
 	if(res == -2):
 		response.write('<html><script type="text/javascript">alert("Price not in the range!");window.location="/TransactionClient/sell/"</script></html>')
 		return response
+	if(res == -8):
+		response.write('<html><script type="text/javascript">alert("Stock is Frozen!");window.location="/TransactionClient/purchase/"</script></html>')
+		return response
 	if(res == -4):
 		response.write('<html><script type="text/javascript">alert("System Error!");window.location="/TransactionClient/sell/"</script></html>')
 		return response
-	if(res == -8):
+	if(res == -16):
 		response.write('<html><script type="text/javascript">alert("Wrong Transaction Password!");window.location="/TransactionClient/purchase/"</script></html>')
 		return response
-	if(res == -32):
+	if(res == -64):
 		response.write('<html><script type="text/javascript">alert("Account will be frozen for inputting wrong passwords too many times!");window.location="/TransactionClient/purchase/"</script></html>')
 		return response
-	if(res == -16):
+	if(res == -32):
 		del request.session['ID']
 		response.write('<html><script type="text/javascript">alert("Accout Frozen!");window.location="/TransactionClient/"</script></html>')
 		return response

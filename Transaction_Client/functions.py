@@ -111,7 +111,7 @@ def getStock(stockID):
 def checkBuying(buyingInfo):
     res = check_trans(buyingInfo['userID'], buyingInfo['TransPwd'])
     if (res[0] < 0):
-        return res[0] * 8
+        return res[0] * 16
     res = StockInfo.objects.filter(StockID=buyingInfo['stockID'])
 
     if res:
@@ -130,6 +130,8 @@ def checkBuying(buyingInfo):
             return -2
         if (buyingInfo['Price'] < stock.CurrentPrice * (1 - stock.BottomLimit)):
             return -2
+        if (stock.State):
+            return -8
         return 0
     else:
             return -4
@@ -147,10 +149,18 @@ def getPossessedStock(userID, stockID):
     else:
         return -1
 
+def getSecurityAccountID(userID):
+    c_res = CapitalAccountInfo.objects.filter(AccountID=userID)
+    if c_res:
+        accountID = c_res[0].SecurityAccount.SecurityID
+        return accountID
+    else:
+        return -1
+
 def checkSaling(salingInfo):
     res = check_trans(salingInfo['userID'], salingInfo['TransPwd'])
     if (res[0] < 0):
-        return res[0] * 8
+        return res[0] * 16
     c_res = CapitalAccountInfo.objects.filter(AccountID=salingInfo['userID'])
     if c_res:
         account = c_res[0].SecurityAccount
@@ -164,6 +174,8 @@ def checkSaling(salingInfo):
                 return -2
             if (salingInfo['Price'] < stock.CurrentPrice * (1 - stock.BottomLimit)):
                 return -2
+            if (stock.State):
+                return -8
             return 0
         else:
             return -4
