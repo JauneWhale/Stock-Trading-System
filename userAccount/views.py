@@ -3,7 +3,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django import forms
 from django.template import RequestContext
-from userAccount.models import UserTable
+# from userAccount.models import UserTable
+from userAccount.models import *
 from django.http import HttpResponseRedirect
 from userAccount.models import StaffTable
 from django.forms.models import model_to_dict
@@ -14,12 +15,13 @@ from django.views.decorators.csrf import csrf_exempt
 #定义表单模型
 class UserForm(forms.Form):
 	SecurityID = forms.CharField(label='SecurityID：',max_length=20)
+	IsFreeze = forms.IntegerField(label='IsFreeze:')
 	name = forms.CharField(label='用户名：',max_length=20)
 	IDcard = forms.CharField(label='IDcard:',max_length=20)
 	phone = forms.CharField(label='phone:',max_length=20)
 	gender = forms.IntegerField(label='gender:')
 	address = forms.CharField(max_length=20)
-	occupation = forms.CharField(label='career:',max_length=20)
+	career = forms.CharField(label='career:',max_length=20)
 	education = forms.CharField(label='education:',max_length=20)
 	company = forms.CharField(label='company:',max_length=20)
 	#IsFree = forms.CharField(label='IsFreeze:',max_length=20)
@@ -134,7 +136,7 @@ def openSA(request):
 	education = ""
 	company = ""
 	message = ""
-	IsFreeze="1"
+	IsFreeze = 0
 
 	CapitalID=""
 
@@ -162,7 +164,6 @@ def openSA(request):
 			if request.POST.has_key(u'company'):
 				company = request.POST[u'company'].encode('utf-8')
 
-			print "test2"
 			if (SecurityID == "" or name == "" or IDcard == "" or phone=="" or gender == "" or address == "" or career == "" or education == "" or company == ""):
 				tmp = 1
 
@@ -170,10 +171,7 @@ def openSA(request):
 				tmp = 2
 				 #将表单写入数据库
 				user = UserTable()
-				security = SecurityAccountInfo()
-				# capitalInfo = CapitalInfo()
-
-				security.SecurityID = SecurityID
+				
 				user.Name = name
 				user.IDcard = IDcard
 				user.Tel = phone
@@ -182,17 +180,19 @@ def openSA(request):
 				user.Occupation = career
 				user.EduInfo = education
 				user.Department = company
-				security.IsFreeze=false
-				#user.StuffID="null"
-				#user.StuddName="null"
-				#user.password="null"
-				#user.AccountID="null"
-				# capitalInfo.ActiveMoney=0
-				#user.Passsword="null"
-				#user.BuyPassword="null"
-
 				user.save()
+
+				security = SecurityAccountInfo()
+
+				security.SecurityID = SecurityID
+				security.IDcard=user
+				security.IsFreeze= IsFreeze 
+
+
+				# user.save()
 				security.save()
+
+				print "test" 
 
 
 			if  tmp == 1 :
@@ -208,8 +208,6 @@ def openSA(request):
 
 	else:
 		uf=UserForm()
-
-		
 
 	return render(request, 'openSecurityAccount.html', context)
 
@@ -233,6 +231,7 @@ def  openCA(request):
 	confirm_loginPasswd = ""
 	trans_passwd = ""
 	confirm_transPasswd = ""
+
 	
 	context['result'] = 'initial'
 	if request.POST:

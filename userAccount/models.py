@@ -11,8 +11,8 @@ class UserTable(models.Model):
     # SecurityID = models.CharField(max_length=20)
     # UserID = models.CharField(max_length=20,primary_key=True)
     Name = models.CharField(max_length=20)
-    IDcard = models.CharField(max_length=20)
-    Tel = models.CharField(max_length=20)
+    IDcard = models.CharField(max_length=20,primary_key=True)
+    Tel = models.CharField(max_length=20,default="")
     Gender = models.IntegerField()
     HomeAddr = models.TextField(default="")
     Occupation = models.CharField(max_length=20)
@@ -25,7 +25,7 @@ class UserTable(models.Model):
     # date_joined = models.DateField()
  
     def __unicode__(self):
-        data = self.SecurityID + " " + self.IDcard
+        data = self.IDcard + " " + self.Name
         return data
 
     def compSecurityID(self,SecurityIDtmp):
@@ -76,7 +76,8 @@ class StaffTable(models.Model):
 # 证券账户基本信息
 class SecurityAccountInfo(models.Model):
     SecurityID = models.CharField(max_length=20,primary_key=True)
-    IsFreeze=models.BooleanField(default=False)
+    IsFreeze=models.IntegerField(default=0)
+    IDcard=models.ForeignKey(UserTable)
 
 # 资金账户基本信息
 class CapitalAccountInfo(models.Model):
@@ -112,6 +113,14 @@ class StaffAdmin(admin.ModelAdmin):
 	list_display=('StuddName','StuffID','Password')
 
 admin.site.register(StaffTable,StaffAdmin)
+
+# class SecurityAdmin(admin.ModelAdmin):
+#     list_display=('SecurityID','IsFreeze')
+
+class SecurityAdmin(admin.ModelAdmin):
+    list_display=('SecurityID','IsFreeze','IDcard')
+
+admin.site.register(SecurityAccountInfo,SecurityAdmin)
 
 
 
