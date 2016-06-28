@@ -199,7 +199,7 @@ class GlobalVar(object):
 				TimeSubmit=inst[1],
 				TimeOutOfDate=FrozeTime,
 				InstType=inst[2],
-				InstState=0;#0 is frozen;
+				InstState=0,#0 is frozen;
 				StockID=inst[3],
 				AccountID=CapitalAccountInfo.objects.get(AccountID=inst[5]),
 				SecurityID=SecurityAccountInfo.objects.get(SecurityID=inst[4]),
@@ -213,7 +213,7 @@ class GlobalVar(object):
 				TimeSubmit=inst[1],
 				TimeOutOfDate=FrozeTime,
 				InstType=inst[2],
-				InstState=0;#0 is frozen;
+				InstState=0,#0 is frozen;
 				StockID=inst[3],
 				AccountID=CapitalAccountInfo.objects.get(AccountID=inst[5]),
 				SecurityID=SecurityAccountInfo.objects.get(SecurityID=inst[4]),
