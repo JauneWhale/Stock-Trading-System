@@ -26,6 +26,7 @@ instIdCount = 0
 
 def init_central_trading_system():
 	global glob
+
 	stockInfoList = StockInfo.objects.all();
 	securityStockInfoList = SecurityStockInfo.objects.all();	# this is accounts!!!
 	
