@@ -6,6 +6,7 @@ from django.db import models
 from django.utils import timezone
 
 from database.models import *
+from central import interface
 
 maxPwdWrongNum = 3
 
@@ -116,10 +117,10 @@ def checkBuying(buyingInfo):
 
     if res:
         stock = res[0]
-        print buyingInfo['Price']
-        print stock.CurrentPrice
-        print stock.MaxPrice
-        print stock.MinPrice
+        # print buyingInfo['Price']
+        # print stock.CurrentPrice
+        # print stock.MaxPrice
+        # print stock.MinPrice
         capital = CapitalInfo.objects.filter(AccountID=buyingInfo['userID'])
         if capital:
             if (buyingInfo['Price'] * buyingInfo['num'] > capital[0].ActiveMoney):
@@ -214,21 +215,31 @@ def getRecordByDate(startDate, endDate, userID):
             TimeSubmit__gte=startDate)
     undealed = InstNotDealed.objects.filter(AccountID__AccountID=userID, TimeSubmit__lte=endDate,
             TimeSubmit__gte=startDate)
+    # interface.init_central_trading_system()
+    indeal = interface.query(userID)
     records = []
+    print '12312768716231'
     for r in dealed:
         stock = StockInfo.objects.get(StockID=r.StockID)
         records.append((r.TimeSubmit, r.StockID, stock.StockName, r.InstType, r.Quantity, r.PriceSubmit, 
-            r.Quantity * r.PriceSubmit, 0))
+            r.Quantity * r.PriceSubmit, 0, -1))
     for r in undealed:
         stock = StockInfo.objects.get(StockID=r.StockID)
         records.append((r.TimeSubmit, r.StockID, stock.StockName, r.InstType, r.Quantity, r.PriceSubmit, 
-            r.Quantity * r.PriceSubmit, 1))
+            r.Quantity * r.PriceSubmit, 1, -1))
+    for r in indeal:
+        rec = indeal[r]
+        print rec
+        if rec[1].date() >= startDate and rec[1].date() <= endDate:
+            stock = StockInfo.objects.get(StockID=rec[3])
+            records.append((rec[1],rec[3],stock.StockName, rec[2], rec[6], rec[7], rec[6]*rec[7], 2, rec[0]))
     records.sort(key = lambda r : r[0])
     return records
 
 def getRecordByStock(stockID, userID):
     dealed = InstDealed.objects.filter(AccountID__AccountID=userID, StockID=stockID)
     undealed = InstNotDealed.objects.filter(AccountID__AccountID=userID, StockID=stockID)
+    indeal = interface.query(userID)
     records = []
     for r in dealed:
         stock = StockInfo.objects.get(StockID=r.StockID)
@@ -238,5 +249,11 @@ def getRecordByStock(stockID, userID):
         stock = StockInfo.objects.get(StockID=r.StockID)
         records.append((r.TimeSubmit, r.StockID, stock.StockName, r.InstType, r.Quantity, r.PriceSubmit, 
             r.Quantity * r.PriceSubmit, 1))
+    for r in indeal:
+        rec = indeal[r]
+        print rec
+        stock = StockInfo.objects.get(StockID=rec[3])
+        if stock.StockID == stockID:
+            records.append((rec[1],rec[3],stock.StockName, rec[2], rec[6], rec[7], rec[6]*rec[7], 2, rec[0]))
     records.sort(key = lambda r : r[0])
     return records

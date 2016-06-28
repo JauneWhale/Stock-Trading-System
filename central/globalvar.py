@@ -13,6 +13,7 @@ class GlobalVar(object):
 	def __init__(self):
 		self.InstQueue = {};
 		self.InstNotDealt = {};
+		self.instIdCount = 0
 
 	def insert_notDealt(self, inst):
 		if( self.InstNotDealt.has_key( inst[4] ) ):
@@ -25,6 +26,7 @@ class GlobalVar(object):
 
 		inst = list(inst);
 		# pdb.set_trace();
+		print self.InstQueue
 		if ( self.InstQueue.has_key( inst[3] ) ):
 			if ( inst[2] == 0 ):
 				toMatchQueue = self.InstQueue[ inst[3] ][1];
@@ -91,12 +93,20 @@ class GlobalVar(object):
 					capitalObj.save();
 
 					# update buyer shareHolding
-					secInfo = SecurityStockInfo.objects.get(SecurityID=inst[4], stockID=inst[3]);
-					secInfo.ShareHolding += dealQuantity;
-					secInfo.save();
+					if len(SecurityStockInfo.objects.filter(SecurityID=inst[4], StockID=inst[3])) != 0:
+						secInfo = SecurityStockInfo.objects.get(SecurityID=inst[4], StockID=inst[3]); 						
+						secInfo.ShareHolding += dealQuantity; 						
+						secInfo.save();
+					else:
+						SecurityStockInfo.objects.create(
+						SecurityID = inst[4],
+						StockID=inst[3],
+						ShareHolding=dealQuantity,
+						status=inst[2],
+						BuyPrice = inst[7]);
 
 					# update seller shareHolding
-					secInfo = SecurityStockInfo.objects.get(SecurityID=toMatch[4], stockID=toMatch[3]);
+					secInfo = SecurityStockInfo.objects.get(SecurityID=toMatch[4], StockID=toMatch[3]);
 					secInfo.ShareHolding -= dealQuantity;
 					secInfo.save();
 				elif ( inst[2] == 1 ):
@@ -111,12 +121,12 @@ class GlobalVar(object):
 					capitalObj.save();
 
 					# update seller shareHolding
-					secInfo = SecurityStockInfo.objects.get(SecurityID=inst[4], stockID=inst[3]);
+					secInfo = SecurityStockInfo.objects.get(SecurityID=inst[4], StockID=inst[3]);
 					secInfo.ShareHolding -= dealQuantity;
 					secInfo.save();
 
 					# update buyer shareHolding
-					secInfo = SecurityStockInfo.objects.get(SecurityID=toMatch[4], stockID=toMatch[3]);
+					secInfo = SecurityStockInfo.objects.get(SecurityID=toMatch[4], StockID=toMatch[3]);
 					secInfo.ShareHolding += dealQuantity;
 					secInfo.save();
 
@@ -151,7 +161,8 @@ class GlobalVar(object):
 			if inst[6] > 0:	# match failed
 				self.insert(inst);
 		else:
-			assert False;
+			print 'false'
+			# assert False;
 
 	def insert(self, inst):		# insert an inst into the queue
 		#inst = (ID,time,type,StockID,securityID,accountID,quantity,price) 

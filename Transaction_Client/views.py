@@ -3,6 +3,7 @@ from Transaction_Client import functions
 from django.http import HttpResponse
 from django.utils import timezone
 from central import interface
+from django.template import RequestContext
 import datetime
 
 # Create your views here.
@@ -24,7 +25,7 @@ def check(request):
 	password = str(password)
 	res = functions.login(username, password)
 	response = HttpResponse()
-	print res
+	# print res
 	if(res[0] == 1):
 		request.session['ID'] = username
 		response.write('<html><script type="text/javascript">alert("First Login Success!");window.location="/TransactionClient/faq/"</script></html>')
@@ -172,8 +173,8 @@ def transaction(request):
 		StockID = request.POST["ticker"]
 		TransactionList = functions.getRecordByStock(StockID, username)
 		response = HttpResponse({'TransactionList': TransactionList})
-		print StockID
-		print TransactionList
+		# print StockID
+		# print TransactionList
 		return render(request, 'TransactionClient_transaction.html', {'username': username, 'status': status, 'TransactionList': TransactionList})
 	reaponse = HttpResponse()
 	response.write('<html><script type="text/javascript">;window.location="/TransactionClient/transaction/"</script></html>')
@@ -201,8 +202,8 @@ def search(request):
 		StockID = request.POST["ticker"]
 		TransactionList = functions.getRecordByStock(StockID, username)
 		response = HttpResponse({'TransactionList': TransactionList})
-		print StockID
-		print TransactionList
+		# print StockID
+		# print TransactionList
 		response.write('<html><script type="text/javascript">;window.location="/TransactionClient/transaction/"</script></html>')
 		return response
 	reaponse = HttpResponse()
@@ -254,7 +255,7 @@ def purchase_stock_id_check(request):
 	else:
 		request.session['stockID'] = stockID
 		stockInfo = res[1]
-		return HttpResponse(str(stockInfo.StockName)+"#"+str(stockInfo.CurrentPrice)+"#"+str(stockInfo.MaxPrice)+"#"+str(stockInfo.MinPrice))
+		return HttpResponse(str(stockInfo.StockName)+"#"+str(stockInfo.CurrentPrice)+"#"+str(stockInfo.CurrentPrice*(1+stockInfo.UpLimit))+"#"+str(stockInfo.CurrentPrice*(1-stockInfo.BottomLimit)))
 	
 def purchase_stock(request):
 	stockID = request.session.get('stockID', default=None)
@@ -265,9 +266,9 @@ def purchase_stock(request):
 	TransPwd = request.POST['trans_passwd']
 	username = request.session.get('ID', default=None)
 	buyingInfo = {'userID':username, 'stockID': stockID, 'Price':PurchasePrice, 'num':PurchaseAmount, 'TransPwd': TransPwd}
-	print buyingInfo
+	# print buyingInfo
 	res = functions.checkBuying(buyingInfo)
-	print res
+	# print res
 	response = HttpResponse()
 	securityID = functions.getSecurityAccountID(username)
 	if(res == 0):
@@ -308,8 +309,8 @@ def sell_stock_id_check(request):
 	else:
 		request.session['stockID'] = stockID
 		stockInfo = res[1]
-		print stockInfo.CurrentPrice
-		return HttpResponse(str(stockInfo.StockName)+"#"+str(stockInfo.CurrentPrice)+"#"+str(stockInfo.MaxPrice)+"#"+str(stockInfo.MinPrice))
+		# print stockInfo.CurrentPrice
+		return HttpResponse(str(stockInfo.StockName)+"#"+str(stockInfo.CurrentPrice)+"#"+str(stockInfo.CurrentPrice*(1+stockInfo.UpLimit))+"#"+str(stockInfo.CurrentPrice*(1-stockInfo.BottomLimit)))
 
 def sell_stock(request):
 	stockID = request.session.get('stockID', default=None)
@@ -324,7 +325,7 @@ def sell_stock(request):
 	securityID = functions.getSecurityAccountID(username)
 	response = HttpResponse()
 	if(res == 0):
-		inst=(0,timezone.now(),1,stockID,securityID,username,int(sellAmount),float(sellPrice))
+		inst=('0',timezone.now(),1,stockID,securityID,username,int(sellAmount),float(sellPrice))
 		interface.sell(inst)
 		response.write('<html><script type="text/javascript">alert("Submit!");window.location="/TransactionClient/sell/"</script></html>')
 		return response
