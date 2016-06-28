@@ -1,7 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="327ae894-04b2-440e-90b0-68c610feb548" name="Default" comment="" />
+    <list default="true" id="327ae894-04b2-440e-90b0-68c610feb548" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datetimepicker-master/tests/.__coverage.html" afterPath="$PROJECT_DIR$/static/bootstrap-datetimepicker-master/tests/.__coverage.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._demo_head.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._demo_head.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datetimepicker-master/sample in bootstrap v2/._index.html" afterPath="$PROJECT_DIR$/static/bootstrap-datetimepicker-master/sample in bootstrap v2/._index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datetimepicker-master/sample in bootstrap v3/._index.html" afterPath="$PROJECT_DIR$/static/bootstrap-datetimepicker-master/sample in bootstrap v3/._index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._markup_component.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._markup_component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._markup_daterange.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._markup_daterange.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._markup_inline.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._markup_inline.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._markup_input.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._markup_input.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._option_calendarweeks.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._option_calendarweeks.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._option_clearbtn.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._option_clearbtn.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._option_daysofweekdisabled.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._option_daysofweekdisabled.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._option_enddate.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._option_enddate.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._option_language.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._option_language.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._option_multidate.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._option_multidate.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._option_startdate.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._option_startdate.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._option_todaybtn.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._option_todaybtn.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._option_todayhighlight.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._option_todayhighlight.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._option_weekstart.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/._option_weekstart.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/tests/._tests.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/tests/._tests.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datetimepicker-master/tests/._tests.html" afterPath="$PROJECT_DIR$/static/bootstrap-datetimepicker-master/tests/._tests.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datetimepicker-master/tests/._tests.min.html" afterPath="$PROJECT_DIR$/static/bootstrap-datetimepicker-master/tests/._tests.min.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/tests/._timezone.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/tests/._timezone.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/TransactionClient_capital.html" afterPath="$PROJECT_DIR$/templates/TransactionClient_capital.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/TransactionClient_faq.html" afterPath="$PROJECT_DIR$/templates/TransactionClient_faq.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/TransactionClient_login.html" afterPath="$PROJECT_DIR$/templates/TransactionClient_login.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/TransactionClient_password.html" afterPath="$PROJECT_DIR$/templates/TransactionClient_password.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/TransactionClient_possessed.html" afterPath="$PROJECT_DIR$/templates/TransactionClient_possessed.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/TransactionClient_purchase.html" afterPath="$PROJECT_DIR$/templates/TransactionClient_purchase.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/TransactionClient_sell.html" afterPath="$PROJECT_DIR$/templates/TransactionClient_sell.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/TransactionClient_stock.html" afterPath="$PROJECT_DIR$/templates/TransactionClient_stock.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/TransactionClient_transaction.html" afterPath="$PROJECT_DIR$/templates/TransactionClient_transaction.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/TransactionClient_unlogin.html" afterPath="$PROJECT_DIR$/templates/TransactionClient_unlogin.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datetimepicker-master/tests/_coverage.html" afterPath="$PROJECT_DIR$/static/bootstrap-datetimepicker-master/tests/_coverage.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/capital.html" afterPath="$PROJECT_DIR$/templates/capital.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/changePassword.html" afterPath="$PROJECT_DIR$/templates/changePassword.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/closeCapitalAccount.html" afterPath="$PROJECT_DIR$/templates/closeCapitalAccount.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/closeSecurityAccount.html" afterPath="$PROJECT_DIR$/templates/closeSecurityAccount.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/demo_head.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/demo_head.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/faq.html" afterPath="$PROJECT_DIR$/templates/faq.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datetimepicker-master/sample in bootstrap v2/index.html" afterPath="$PROJECT_DIR$/static/bootstrap-datetimepicker-master/sample in bootstrap v2/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datetimepicker-master/sample in bootstrap v3/index.html" afterPath="$PROJECT_DIR$/static/bootstrap-datetimepicker-master/sample in bootstrap v3/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/login.html" afterPath="$PROJECT_DIR$/templates/login.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/markup_component.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/markup_component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/markup_daterange.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/markup_daterange.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/markup_inline.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/markup_inline.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/markup_input.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/markup_input.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/models.py" afterPath="$PROJECT_DIR$/database/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/openCapitalAccount.html" afterPath="$PROJECT_DIR$/templates/openCapitalAccount.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/openSecurityAccount.html" afterPath="$PROJECT_DIR$/templates/openSecurityAccount.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/operation.html" afterPath="$PROJECT_DIR$/templates/operation.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/option_calendarweeks.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/option_calendarweeks.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/option_clearbtn.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/option_clearbtn.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/option_daysofweekdisabled.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/option_daysofweekdisabled.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/option_enddate.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/option_enddate.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/option_language.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/option_language.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/option_multidate.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/option_multidate.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/option_startdate.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/option_startdate.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/option_todaybtn.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/option_todaybtn.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/option_todayhighlight.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/option_todayhighlight.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/option_weekstart.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/docs/_screenshots/option_weekstart.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/password.html" afterPath="$PROJECT_DIR$/templates/password.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/processed.html" afterPath="$PROJECT_DIR$/templates/processed.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/purchase.html" afterPath="$PROJECT_DIR$/templates/purchase.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/reportCapitalLoss.html" afterPath="$PROJECT_DIR$/templates/reportCapitalLoss.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/reportSecurityLoss.html" afterPath="$PROJECT_DIR$/templates/reportSecurityLoss.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/resubmitCapitalAccount.html" afterPath="$PROJECT_DIR$/templates/resubmitCapitalAccount.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/resubmitSecurityAccount.html" afterPath="$PROJECT_DIR$/templates/resubmitSecurityAccount.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/sell.html" afterPath="$PROJECT_DIR$/templates/sell.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/stock.html" afterPath="$PROJECT_DIR$/templates/stock.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/tests/tests.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/tests/tests.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datetimepicker-master/tests/tests.html" afterPath="$PROJECT_DIR$/static/bootstrap-datetimepicker-master/tests/tests.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datetimepicker-master/tests/tests.min.html" afterPath="$PROJECT_DIR$/static/bootstrap-datetimepicker-master/tests/tests.min.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bootstrap-datepicker-master/tests/timezone.html" afterPath="$PROJECT_DIR$/static/bootstrap-datepicker-master/tests/timezone.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/transaction.html" afterPath="$PROJECT_DIR$/templates/transaction.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/unlogin.html" afterPath="$PROJECT_DIR$/templates/unlogin.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock_Trading_System/urls.py" afterPath="$PROJECT_DIR$/Stock_Trading_System/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/userAccountLogin.html" afterPath="$PROJECT_DIR$/templates/userAccountLogin.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/userHomepage.html" afterPath="$PROJECT_DIR$/templates/userHomepage.html" />
+    </list>
     <ignored path="Stock_Trading_System.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -16,17 +96,52 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="Stock_Trading_System" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
+    <leaf>
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Stock_Trading_System/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="430">
-              <caret line="129" column="1" selection-start-line="129" selection-start-column="1" selection-end-line="129" selection-end-column="1" />
+            <state vertical-scroll-proportion="-13.56" vertical-offset="1903" max-vertical-offset="2660">
+              <caret line="118" column="2" selection-start-line="118" selection-start-column="2" selection-end-line="118" selection-end-column="2" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/manageStock/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.0" vertical-offset="376" max-vertical-offset="2185">
+              <caret line="29" column="25" selection-start-line="29" selection-start-column="25" selection-end-line="29" selection-end-column="25" />
+              <folding>
+                <element signature="e#15#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="trade_manage.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/trade_manage.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.4203233" vertical-offset="3485" max-vertical-offset="8493">
+              <caret line="193" column="59" selection-start-line="193" selection-start-column="59" selection-end-line="193" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/database/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-21.64" vertical-offset="1245" max-vertical-offset="1976">
+              <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -35,7 +150,7 @@
       <file leaf-file-name="wsgi.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Stock_Trading_System/wsgi.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="380">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -45,8 +160,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Stock_Trading_System/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="21" column="50" selection-start-line="21" selection-start-column="50" selection-end-line="21" selection-end-column="50" />
+            <state vertical-scroll-proportion="-23.72" vertical-offset="1022" max-vertical-offset="1957">
+              <caret line="85" column="5" selection-start-line="85" selection-start-column="5" selection-end-line="85" selection-end-column="5" />
               <folding>
                 <element signature="e#653#685#0" expanded="true" />
               </folding>
@@ -57,8 +172,8 @@
       <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/login.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="821">
-              <caret line="120" column="47" selection-start-line="120" selection-start-column="47" selection-end-line="120" selection-end-column="47" />
+            <state vertical-scroll-proportion="-10.428572" vertical-offset="2273" max-vertical-offset="2736">
+              <caret line="135" column="6" selection-start-line="135" selection-start-column="6" selection-end-line="135" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -73,9 +188,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/login/views.py" />
-        <option value="$PROJECT_DIR$/Stock_Trading_System/urls.py" />
         <option value="$PROJECT_DIR$/templates/login.html" />
         <option value="$PROJECT_DIR$/Stock_Trading_System/settings.py" />
+        <option value="$PROJECT_DIR$/database/models.py" />
+        <option value="$PROJECT_DIR$/Stock_Trading_System/urls.py" />
+        <option value="$PROJECT_DIR$/templates/trade_manage.html" />
+        <option value="$PROJECT_DIR$/manageStock/views.py" />
       </list>
     </option>
   </component>
@@ -88,8 +206,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="width" value="1554" />
+    <option name="height" value="916" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -112,8 +230,6 @@
       <autoscrollToSource />
       <autoscrollFromSource />
       <sortByType />
-      <manualOrder />
-      <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
       <pane id="ProjectPane">
@@ -144,49 +260,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Stock_Trading_System" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Stock_Trading_System" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Stock_Trading_System" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Stock_Trading_System" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="login" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Stock_Trading_System" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Stock_Trading_System" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Stock_Trading_System" />
+              <option name="myItemId" value="userAccount" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -200,82 +274,16 @@
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="recentsLimit" value="5" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/manage.py" />
+    <property name="restartRequiresConfirmation" value="true" />
   </component>
-  <component name="RunManager" selected="Django server.Stock_Trading_System">
-    <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Stock_Trading_System" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="TARGET" value="" />
-      <option name="SETTINGS_FILE" value="" />
-      <option name="CUSTOM_SETTINGS" value="false" />
-      <option name="USE_OPTIONS" value="false" />
-      <option name="OPTIONS" value="" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
-      <method />
-    </configuration>
-    <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Stock_Trading_System" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="ADDITIONAL_ARGS" value="" />
-      <method />
-    </configuration>
-    <configuration default="true" type="PyLettuceRunConfigurationType" factoryName="Lettuce">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Stock_Trading_System" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="ADDITIONAL_ARGS" value="" />
-      <method />
-    </configuration>
-    <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Stock_Trading_System" />
-      <option name="launchJavascriptDebuger" value="false" />
-      <option name="port" value="8000" />
-      <option name="host" value="" />
-      <option name="additionalOptions" value="" />
-      <option name="browserUrl" value="" />
-      <option name="runTestServer" value="false" />
-      <option name="runNoReload" value="false" />
-      <option name="useCustomRunCommand" value="false" />
-      <option name="customRunCommand" value="" />
-      <method />
-    </configuration>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings />
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.runserver">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -294,7 +302,7 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="Tox" factoryName="Tox">
+    <configuration default="true" type="tests" factoryName="Unittests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -303,24 +311,43 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <module name="Stock_Trading_System" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <gulpfile />
-      <tasks />
-      <arguments />
+    <configuration default="true" type="tests" factoryName="py.test">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
       <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
-      <command value="run-script" />
-      <scripts />
-      <node-interpreter value="project" />
-      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Stock_Trading_System" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="testToRun" value="" />
+      <option name="keywords" value="" />
+      <option name="params" value="" />
+      <option name="USE_PARAM" value="false" />
+      <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Attests">
@@ -385,52 +412,24 @@
       <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="tests" factoryName="Unittests">
+    <configuration default="false" name="runserver" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Python27\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Stock_Trading_System" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="py.test">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Stock_Trading_System" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="testToRun" value="" />
-      <option name="keywords" value="" />
-      <option name="params" value="" />
-      <option name="USE_PARAM" value="false" />
-      <option name="USE_KEYWORD" value="false" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/manage.py" />
+      <option name="PARAMETERS" value="runserver" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
       <method />
     </configuration>
     <configuration default="false" name="Stock_Trading_System" type="Python.DjangoServer" factoryName="Django server">
@@ -458,12 +457,10 @@
       <method />
     </configuration>
     <list size="1">
-      <item index="0" class="java.lang.String" itemvalue="Django server.Stock_Trading_System" />
+      <item index="0" class="java.lang.String" itemvalue="Python.runserver" />
     </list>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
-  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -472,34 +469,57 @@
       <changelist id="327ae894-04b2-440e-90b0-68c610feb548" name="Default" comment="" />
       <created>1462512519193</created>
       <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
       <updated>1462512519193</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1554" height="916" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39957717" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24934037" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3210191" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32899868" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39957717" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32866243" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24968314" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39957717" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -512,6 +532,11 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="myTodoPanelSettings">
+      <TodoPanelSettings />
+    </option>
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
@@ -519,15 +544,15 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Stock_Trading_System/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3200">
-          <caret line="128" column="56" selection-start-line="128" selection-start-column="56" selection-end-line="128" selection-end-column="56" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2660">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Stock_Trading_System/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="380">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -535,7 +560,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Stock_Trading_System/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
+        <state vertical-scroll-proportion="0.0" vertical-offset="399" max-vertical-offset="1824">
           <caret line="21" column="50" selection-start-line="21" selection-start-column="50" selection-end-line="21" selection-end-column="50" />
           <folding>
             <element signature="e#653#685#0" expanded="true" />
@@ -545,49 +570,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Stock_Trading_System/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/login/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Stock_Trading_System/wsgi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Stock_Trading_System/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="21" column="50" selection-start-line="21" selection-start-column="50" selection-end-line="21" selection-end-column="50" />
-          <folding>
-            <element signature="e#653#685#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="821">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2280" max-vertical-offset="2470">
           <caret line="120" column="47" selection-start-line="120" selection-start-column="47" selection-end-line="120" selection-end-column="47" />
           <folding />
         </state>
@@ -595,8 +578,117 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Stock_Trading_System/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="129" column="1" selection-start-line="129" selection-start-column="1" selection-end-line="129" selection-end-column="1" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+          <caret line="128" column="56" selection-start-line="128" selection-start-column="56" selection-end-line="128" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Stock_Trading_System/wsgi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Stock_Trading_System/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+          <caret line="21" column="50" selection-start-line="21" selection-start-column="50" selection-end-line="21" selection-end-column="50" />
+          <folding>
+            <element signature="e#653#685#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Stock_Trading_System/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/login/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Stock_Trading_System/wsgi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-21.64" vertical-offset="1245" max-vertical-offset="1976">
+          <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Stock_Trading_System/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.56" vertical-offset="1903" max-vertical-offset="2660">
+          <caret line="118" column="2" selection-start-line="118" selection-start-column="2" selection-end-line="118" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/userAccount/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.64" vertical-offset="1691" max-vertical-offset="23541">
+          <caret line="106" column="12" selection-start-line="106" selection-start-column="4" selection-end-line="106" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.428572" vertical-offset="2273" max-vertical-offset="2736">
+          <caret line="135" column="6" selection-start-line="135" selection-start-column="6" selection-end-line="135" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Stock_Trading_System/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-23.72" vertical-offset="1022" max-vertical-offset="1957">
+          <caret line="85" column="5" selection-start-line="85" selection-start-column="5" selection-end-line="85" selection-end-column="5" />
+          <folding>
+            <element signature="e#653#685#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manageStock/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.0" vertical-offset="376" max-vertical-offset="2185">
+          <caret line="29" column="25" selection-start-line="29" selection-start-column="25" selection-end-line="29" selection-end-column="25" />
+          <folding>
+            <element signature="e#15#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/trade_manage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4203233" vertical-offset="3485" max-vertical-offset="8493">
+          <caret line="193" column="59" selection-start-line="193" selection-start-column="59" selection-end-line="193" selection-end-column="59" />
           <folding />
         </state>
       </provider>

@@ -257,13 +257,13 @@
                                 <td>{{ i.4 }}</td>
                                 <td>{{ i.5 }}</td>
                                 <td>{{ i.6 }}</td>
-                                <td>
+                                <td id="state"+"{{ i.}}">
                                 {% if i.7 == 0 %}
                                     dealed
                                 {% elif i.7 == 1 %}
-                                    on market
+                                    undeal
                                 {% elif i.7 == 2 %}
-                                    <button type="submit" value="submit">
+                                    <button type="submit" value="submit" id='{{ i.8 }}' onclick="">
                                         Recall
                                     </button>
                                 {% endif %}

