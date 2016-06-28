@@ -182,10 +182,10 @@ class GlobalVar(object):
 		else:
 			assert False # no such stock
 
-	def delete(self, instId):
-
-		inst = self.InstNotDealt[ inst[4] ].pop( inst[0] );
-		self.InstQueue.remove(instId);
+	def delete(self, instId,securityId): 		
+		inst = self.InstNotDealt[ securityId ][instId] 		
+		self.InstNotDealt[ securityId ].pop(instId); 		
+		self.InstQueue[inst[3]][inst[2]].remove(instId);
 	
 	def flush(self,stockID): #clear and load
 		FrozeTime = datetime.datetime.now();

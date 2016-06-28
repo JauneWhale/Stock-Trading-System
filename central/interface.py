@@ -87,9 +87,9 @@ def admin_query():
 	Stocklist={"buy_list":buy_list,"sell_list":sell_list};
 	return Stocklist;
 
-def revoke(instId):
+def revoke(instId, s_id):
 	global glob
-	glob.delete(instId);
+	glob.delete(instId, s_id);
 
 def renew(stockId):
 	stockInfo = StockInfo.objects.get(StockID=stockId);
@@ -101,7 +101,7 @@ def froze(stockId):
 	stockInfo.state=1;
 	#glob.flush(stockId); #clear the InstNotDealt map and the queue, push them into the database
 
-init_central_trading_system()
+# init_central_trading_system()
 
 #inst = (ID,time,type,StockID,securityID,accountID,quantity,price) 
 #		[0] [1]  [2]  [3]		[4]			 [5]	   [6]	  [7]

@@ -6,7 +6,7 @@ from django.template import RequestContext
 # from userAccount.models import UserTable
 from userAccount.models import *
 from django.http import HttpResponseRedirect
-from userAccount.models import StaffTable
+from database.models import *
 from django.forms.models import model_to_dict
 from django.views.decorators.csrf import csrf_exempt
 

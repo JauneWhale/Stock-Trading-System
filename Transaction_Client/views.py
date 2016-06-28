@@ -256,7 +256,7 @@ def purchase_stock_id_check(request):
 		request.session['stockID'] = stockID
 		stockInfo = res[1]
 		return HttpResponse(str(stockInfo.StockName)+"#"+str(stockInfo.CurrentPrice)+"#"+str(stockInfo.CurrentPrice*(1+stockInfo.UpLimit))+"#"+str(stockInfo.CurrentPrice*(1-stockInfo.BottomLimit)))
-	
+
 def purchase_stock(request):
 	stockID = request.session.get('stockID', default=None)
 	del request.session['stockID']
@@ -299,6 +299,11 @@ def purchase_stock(request):
 		response.write('<html><script type="text/javascript">alert("Accout Frozen!");window.location="/TransactionClient/"</script></html>')
 		return response
 
+
+def revoke_inst(request):
+	inst_id = request.GET["inst_id"]
+	interface.revoke(inst_id, request.session.get('ID'))
+	return HttpResponse("0");
 
 def sell_stock_id_check(request):
 	stockID = request.GET["stock_id"]

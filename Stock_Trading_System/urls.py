@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     #Transaction Client
     url(r'^TransactionClient/$', Transaction_Client_views.login, name = 'Tran_login'),
-     url(r'^TransactionClient/logout', Transaction_Client_views.logout, name = 'Tran_logout'),
+    url(r'^TransactionClient/logout', Transaction_Client_views.logout, name = 'Tran_logout'),
     url(r'^TransactionClient/check/', Transaction_Client_views.check, name = 'Tran_check'),
     url(r'^TransactionClient/password/', Transaction_Client_views.password, name='password'),
     url(r'^TransactionClient/capital/', Transaction_Client_views.capital, name='capital'),
@@ -45,6 +45,7 @@ urlpatterns = [
     url(r'^TransactionClient/purchase_stock_id_check/', Transaction_Client_views.purchase_stock_id_check, name='purchase_stock_id_check'),
     url(r'^TransactionClient/sellStock/', Transaction_Client_views.sell_stock, name='sell_stock'),
     url(r'^TransactionClient/sell_stock_id_check/', Transaction_Client_views.sell_stock_id_check, name='sell_stock_id_check'),
+    url(r'^TransactionClient/revoke_request/', Transaction_Client_views.revoke_inst, name='revoke_inst'),
  
 
     url(r'^TransactionClient/modipasswd/', Transaction_Client_views.modipasswd, name='modipasswd'),
@@ -84,7 +85,7 @@ urlpatterns = [
     # change password(include login password and transaction password)
     url(r'^userAccount/changePassword/', userAccount_views.changePassword, name='userAccount_changePassword'),    
      
-# Manage Stocks
+    # Manage Stocks
     url(r'^Manage/getStockInfo/', manageStock_views.GetStockInfo, name = 'getStockInfo'),
     url(r'^Manage/getStockList/', manageStock_views.GetStockList, name = "getStockList"),
     url(r'^Manage/freeze/', manageStock_views.FreezeStock, name = 'freezeStock'),

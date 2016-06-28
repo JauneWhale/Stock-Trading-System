@@ -6,11 +6,16 @@ from django.utils import timezone
 
 # Create your models here.
 
+class StaffTable(models.Model):
+	#员工表
+    StuffID=models.CharField(max_length=20,primary_key=True)
+    StuddName=models.CharField(max_length=20)
+    Password = models.CharField(max_length=20)
+
 # 用户表
 class UserTable(models.Model):
-	UserID = models.CharField(max_length=20)
 	Name = models.CharField(max_length=20)
-	IDcard = models.CharField(max_length=20,default='0')
+	IDcard = models.CharField(max_length=20,primary_key=True)
 	Gender = models.IntegerField(default=0)
 	Occupation = models.CharField(max_length=20,default='0')
 	EduInfo = models.CharField(max_length=20,default='0')
@@ -23,6 +28,8 @@ class UserTable(models.Model):
 # 证券账户基本信息
 class SecurityAccountInfo(models.Model):
 	SecurityID = models.CharField(max_length=20)
+	IsFreeze=models.IntegerField(default=0)
+	IDcard=models.ForeignKey(UserTable)
 
 # 资金账户基本信息
 class CapitalAccountInfo(models.Model):

@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 from database.models import StockManage
 from database.models import StockInfo
+import central
 
 # Create your views here.
 
@@ -21,10 +22,9 @@ def GetStockInfo(request):
     adminID = request.GET['id']
     StocksInfoList = []
      # StockID, StockName, Amount, CurrentPrice, QuoteChange, UpLimit, DownLimit, State
-    '''
     stocks = StockManage.objects.filter(AdminID=adminID)#缺
     if len(stocks) == 0:
-    	stocks = StockInfo.objects.all()
+        stocks = StockInfo.objects.all()
     for Stock in stocks:
         if len(stocks) == 0:
             stock = Stock
@@ -66,12 +66,14 @@ def GetStockInfo(request):
     stock3['state'] = 0
     stock3['price_limit'] = 8
     StocksInfoList = [stock1, stock2, stock3]
-
+    '''
     return JsonResponse(StocksInfoList, safe=False)
 
 #返回列表
 def GetStockList(request):
     stockID = request.GET['id']
+    StockList = central.interface.admin_query(stockID)
+    '''
     StockList = {}
     # Price, Buy
     # 临时显示用数据
@@ -80,17 +82,26 @@ def GetStockList(request):
     sell_list = []
     sell_list.append({"id": "S021", "s_id": "00106", "price": 103.20, "amount": 150})
     StockList = {"buy_list": buy_list, "sell_list": sell_list}
+    '''
     return JsonResponse(StockList, safe=False)
 
 #以下三个成功返回1，失败返回0
 def FreezeStock(request):
     stockID = request.GET['id']
-    data = {'state': 1}
+    try:
+        central.interface.froze(stockID)
+        data = {'state': 1}
+    except:
+        data = {'state': 0}
     return JsonResponse(data, safe=False)
 
 def RemuseStock(request):
     stockID = request.GET['id']
-    data = {'state': 1}
+    try:
+        central.interface.renew(stockID)
+        data = {'state': 1}
+    except:
+        data = {'state': 0}
     return JsonResponse(data, safe=False)
 
 def SetLimit(request):

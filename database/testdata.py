@@ -10,6 +10,8 @@ capitalAccount = CapitalAccountInfo(AccountID='123',UserTable=userTable,Security
 
 capitalInfo = CapitalInfo(AccountID='123')
 
+stockInfo = StockInof(StockName='aaa',StockID='111');
+
 userTable.save()
 securityAccount.save()
 capitalAccount.save()

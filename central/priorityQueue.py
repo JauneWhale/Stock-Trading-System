@@ -21,9 +21,9 @@ class PriorityQueue(object):
 	
 	def remove(self, instId):	# remove by instId which is wierd but we have no choice
 		for i in range(0, len(self.queue)):
-			if( self.queue[i][1][0] == instID):
+			if( self.queue[i][1][0] == instId):
 				self.queue.pop(i);
-		assert False
+		# assert False
 
 	def update(self, inst, idx):
 		assert idx < len(self.queue);

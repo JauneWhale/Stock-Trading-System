@@ -10,4 +10,4 @@ admin.site.register(InstDealed)
 admin.site.register(StockInfo)
 admin.site.register(CapitalInfo)
 admin.site.register(SecurityStockInfo)
-
+admin.site.register(StaffTable)
