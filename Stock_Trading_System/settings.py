@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'Transaction_Client',
     'userAccount',
     'central',
+    'search',
 ]
 
 MIDDLEWARE_CLASSES = [

@@ -21,6 +21,7 @@ from Transaction_Client import views as Transaction_Client_views
 # from central import views as central_views
 from userAccount import views as userAccount_views
 from manageStock import views as manageStock_views
+from search import  views as search_views
 
 urlpatterns = [
     url(r'^$', 'login.views.index', name='login'),
@@ -92,6 +93,10 @@ urlpatterns = [
     url(r'^Manage/resume/', manageStock_views.RemuseStock, name = 'resumeStock'),
     url(r'^Manage/setLimit/', manageStock_views.SetLimit, name ='setLimit'),
     url(r'^Manage/', manageStock_views.home, name = 'manage_home'),
+
+    url(r'^search/',search_views.main),
+    url(r'^r1min', search_views.refresh_1min),
+    url(r'^r5s', search_views.refresh_5s),
 
 ]
 
