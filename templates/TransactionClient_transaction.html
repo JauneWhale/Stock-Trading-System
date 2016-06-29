@@ -291,6 +291,7 @@
     function revoke(inst_id){
         console.log(inst_id);
         $.get("/TransactionClient/revoke_request/",{'inst_id':inst_id}, function(){
+            alert("Recall Success !");
             $("#"+inst_id).html("undeal");
         })
     }
