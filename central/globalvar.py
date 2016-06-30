@@ -55,7 +55,7 @@ class GlobalVar(object):
 					inst[6] = 0;
 
 					# update instNotDealt map
-					self.InstNotDealt[ toMatch[4] ][ toMatch[0] ][6] = toMatch;
+					self.InstNotDealt[ toMatch[4] ][ toMatch[0] ][6] = toMatch[6];
 					# aupdate toMatchQueue
 					toMatchQueue.update(toMatch, 0);
 
@@ -84,7 +84,7 @@ class GlobalVar(object):
 				if ( inst[2] == 0 ):
 					# update buyer account money
 					capitalObj = CapitalInfo.objects.get(AccountID=inst[5]);
-					capitalObj.ActiveMoney -= dealPrice * dealQuantity;
+					capitalObj.FrozenMoney -= inst[7] * dealQuantity;
 					capitalObj.save();
 
 					# update seller account money
@@ -95,7 +95,8 @@ class GlobalVar(object):
 					# update buyer shareHolding
 					if len(SecurityStockInfo.objects.filter(SecurityID=inst[4], StockID=inst[3])) != 0:
 						secInfo = SecurityStockInfo.objects.get(SecurityID=inst[4], StockID=inst[3]); 						
-						secInfo.ShareHolding += dealQuantity; 						
+						secInfo.BuyPrice +=(secInfo.ShareHolding*secInfo.BuyPrice+dealPrice * dealQuantity)/(secInfo.ShareHolding+dealQuantity)
+						secInfo.ShareHolding += dealQuantity; 
 						secInfo.save();
 					else:
 						SecurityStockInfo.objects.create(
@@ -103,7 +104,7 @@ class GlobalVar(object):
 						StockID=inst[3],
 						ShareHolding=dealQuantity,
 						status=inst[2],
-						BuyPrice = inst[7]);
+						BuyPrice = dealPrice);
 
 					# update seller shareHolding
 					secInfo = SecurityStockInfo.objects.get(SecurityID=toMatch[4], StockID=toMatch[3]);
@@ -117,18 +118,28 @@ class GlobalVar(object):
 
 					# update buyer account money
 					capitalObj = CapitalInfo.objects.get(AccountID=toMatch[5]);
-					capitalObj.ActiveMoney -= dealPrice * dealQuantity;
+					capitalObj.FrozenMoney -= inst[7] * dealQuantity;
 					capitalObj.save();
 
 					# update seller shareHolding
+					
 					secInfo = SecurityStockInfo.objects.get(SecurityID=inst[4], StockID=inst[3]);
 					secInfo.ShareHolding -= dealQuantity;
 					secInfo.save();
 
 					# update buyer shareHolding
-					secInfo = SecurityStockInfo.objects.get(SecurityID=toMatch[4], StockID=toMatch[3]);
-					secInfo.ShareHolding += dealQuantity;
-					secInfo.save();
+					if len(SecurityStockInfo.objects.filter(SecurityID=toMatch[4], StockID=toMatch[3])) != 0:
+						secInfo = SecurityStockInfo.objects.get(SecurityID=toMatch[4], StockID=toMatch[3]);
+						secInfo.BuyPrice = (secInfo.ShareHolding*secInfo.BuyPrice+dealPrice * dealQuantity)/(secInfo.ShareHolding+dealQuantity)
+						secInfo.ShareHolding += dealQuantity;
+						secInfo.save();
+					else:
+						SecurityStockInfo.objects.create(
+						SecurityID = toMatch[4],
+						StockID=toMatch[3],
+						ShareHolding=dealQuantity,
+						status=toMatch[2],
+						BuyPrice = dealPrice);
 
 				# insert 2 insts into dealed instruction table
 				InstDealed.objects.create(
@@ -184,7 +195,13 @@ class GlobalVar(object):
 
 	def delete(self, instId,securityId): 		
 		inst = self.InstNotDealt[ securityId ][instId] 		
-		self.InstNotDealt[ securityId ].pop(instId); 		
+		popObj = self.InstNotDealt[ securityId ].pop(instId); 
+		capitalObj = CapitalInfo.objects.get(AccountID=securityId);
+		capitalObj.ActiveMoney += popObj[6] * popObj[7];
+		capitalObj.FrozenMoney -= popObj[6] * popObj[7];
+		capitalObj.save();
+		
+		
 		self.InstQueue[inst[3]][inst[2]].remove(instId);
 	
 	def flush(self,stockID): #clear and load

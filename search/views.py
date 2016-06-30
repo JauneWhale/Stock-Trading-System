@@ -212,10 +212,10 @@ class UpdateDbRegular(threading.Thread):
 
 		while (True):
 			for i in xrange(lg):
-				A_D = random.random()*0.2-0.1
-				if currentprice[i] <= 5 and A_D <0:
+				A_D = random.random()*0.02-0.01
+				if currentprice[i] <= 9 and A_D <0:
 					A_D = -A_D
-				if currentprice[i] >= 100 and A_D >0:
+				if currentprice[i] >= 11 and A_D >0:
 					A_D = -A_D
 				rd = A_D*currentprice[i]
 				currentprice[i] = currentprice[i] + rd
@@ -237,4 +237,4 @@ class UpdateDbRegular(threading.Thread):
 					maxvalue[i] = 0
 					minvalue[i] = 100
 			count = count + 1
-			sleep(1)
+			sleep(0.1)
