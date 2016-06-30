@@ -34,13 +34,13 @@ urlpatterns = [
     url(r'^TransactionClient/password/', Transaction_Client_views.password, name='password'),
     url(r'^TransactionClient/capital/', Transaction_Client_views.capital, name='capital'),
     url(r'^TransactionClient/possessed/', Transaction_Client_views.possessed, name='possessed'),
-    url(r'^TransactionClient/stock/', Transaction_Client_views.stock, name='stock'),
+    url(r'^TransactionClient/stock/', search_views.main, name='stock'),
     url(r'^TransactionClient/transaction/', Transaction_Client_views.transaction, name='transaction'),
     url(r'^TransactionClient/purchase/', Transaction_Client_views.purchase, name='purchase'),
     url(r'^TransactionClient/sell/', Transaction_Client_views.sell, name='sell'),
     url(r'^TransactionClient/faq/', Transaction_Client_views.faq, name='faq'),
-    url(r'^TransactionClient/unlogin/', Transaction_Client_views.unlogin, name='unlogin'),
-	url(r'^TransactionClient/search/', Transaction_Client_views.search, name='search'),    
+    url(r'^TransactionClient/unlogin/', search_views.main2, name='unlogin'),
+	url(r'^TransactionClient/search/', Transaction_Client_views.search, name='search'),
 
 	url(r'^TransactionClient/purchaseStock/', Transaction_Client_views.purchase_stock, name='purchase_stock'),
     url(r'^TransactionClient/purchase_stock_id_check/', Transaction_Client_views.purchase_stock_id_check, name='purchase_stock_id_check'),
@@ -50,6 +50,7 @@ urlpatterns = [
  
 
     url(r'^TransactionClient/modipasswd/', Transaction_Client_views.modipasswd, name='modipasswd'),
+    url(r'^TransactionClient/shr', search_views.search_history),
 	# #Central Trading System
 	# #init
 	# url(r'^init/',central_views.initial),
@@ -94,9 +95,9 @@ urlpatterns = [
     url(r'^Manage/setLimit/', manageStock_views.SetLimit, name ='setLimit'),
     url(r'^Manage/', manageStock_views.home, name = 'manage_home'),
 
-    url(r'^search/',search_views.main),
-    url(r'^r1min', search_views.refresh_1min),
-    url(r'^r5s', search_views.refresh_5s),
+    # url(r'^search/',search_views.main),
+    url(r'^TransactionClient/r1min', search_views.refresh_1min),
+    url(r'^TransactionClient/r5s', search_views.refresh_5s),
 
 ]
 
