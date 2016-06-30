@@ -29,6 +29,36 @@ def JsonWrap(historyinfo):
 	return data
 
 @csrf_exempt
+def main2(req):
+	global  HasOpened
+	if  not HasOpened:
+		updateDbRegular = UpdateDbRegular()
+		updateDbRegular.setDaemon(True)
+		updateDbRegular.start()
+		HasOpened = True
+	pk = random.randint(1,StockInfo.objects.count())
+	flag = 0
+	if req.method == 'POST':
+		stockinfo = req.POST.get('value')
+		try:
+			x = StockInfo.objects.get(Q(StockID=stockinfo)|Q(StockName=stockinfo))
+			historyinfo = StockHistoryInfo.objects.filter(StockID=x).order_by('-HistoryTime')[:100]
+			flag = 2
+		except StockInfo.DoesNotExist:
+			flag = 1
+		except StockHistoryInfo.DoesNotExist:
+			flag = 1
+	if flag == 1 or flag == 0:
+		try:
+			x = StockInfo.objects.all()[pk-1]
+			historyinfo = StockHistoryInfo.objects.filter(StockID=x).order_by('-HistoryTime')[:100]
+		except StockInfo.DoesNotExist:
+			pass
+		except StockHistoryInfo.DoesNotExist:
+			pass
+	return render(req,'unlogin_stock.html',{"flag":flag,"stockid":x.StockID,"stockname":x.StockName,"data":json.dumps(JsonWrap(historyinfo))})
+
+@csrf_exempt
 def main(req):
 	global  HasOpened
 	if  not HasOpened:

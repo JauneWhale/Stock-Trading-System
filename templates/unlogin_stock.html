@@ -1,8 +1,8 @@
-{%extends "TransactionClient_stock.html" %}
+{%extends "TransactionClient_unlogin.html" %}
 
 {% block stockGraph %}
           <h3>Real Time Chart</h3>
-          <form id="edit-profile" class="form-horizontal" method="post" action="../stock/"/>{% csrf_token %}
+          <form id="edit-profile" class="form-horizontal" method="post" action="../unlogin/"/>{% csrf_token %}
               <label class="control-label">Input ID/Name</label>
               <div class="controls">
                 <input type="text" class="input-medium disabled" name="value" id="search_id" value="{{stockid}}"/>
