@@ -230,6 +230,9 @@ def  openCA(request):
 	confirm_loginPasswd = ""
 	trans_passwd = ""
 	confirm_transPasswd = ""
+	ActiveMoney=0.0
+	FrozenMoney = 0.0
+	BankCard = 0
 
 	
 	context['result'] = 'initial'
@@ -277,6 +280,13 @@ def  openCA(request):
 					newca.SecurityAccount = sa[0]
 					newca.BuyPassword = trans_passwd
 					newca.save()
+
+					newci = CapitalInfo()
+					newci.AccountID = CapitalID
+					newci.ActiveMoney = ActiveMoney
+					newci.FrozenMoney = FrozenMoney
+					newci.BankCard = BankCard
+					newci.save()
 				else:
 					tmp=3
 			else:
@@ -830,6 +840,7 @@ def operation(request):#存取款
 					dictTmp['phone'] = "initial"
 					dictTmp['IsTransFreeze']=True
 					dictTmp['CapitalID']=CapitalID1
+					# dictTmp['ActiveMoney']=0
 
 					#创建临时数据
 					userData = CapForm(dictTmp)
@@ -844,9 +855,11 @@ def operation(request):#存取款
 									if ca[0].IsTransFreeze == True:
 										context['result'] = "该资金账户已被锁定！无法进行交易！"
 									else:
-										ci = CapitalInfo.objects.get(AccountID=ca[0])
+										ci = CapitalInfo.objects.get(AccountID=ca[0].AccountID)
 										ci.ActiveMoney = ci.ActiveMoney + float(balance1)
 										ci.save()
+										print 12314134324
+										print ca[0].AccountID
 										context['result'] = "存款成功！"
 								else:
 									context['result'] = "hahahah111！"
@@ -889,7 +902,7 @@ def operation(request):#存取款
 									if ca[0].IsTransFreeze == True:
 										context['result'] = "该资金账户已被锁定！无法进行交易！"
 									else:
-										ci = CapitalInfo.objects.get(AccountID=ca[0])
+										ci = CapitalInfo.objects.get(AccountID=ca[0].AccountID)
 										if ci.ActiveMoney < float(balance2):
 											context['result'] = "余额不足！"
 										else:
