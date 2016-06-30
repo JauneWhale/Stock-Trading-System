@@ -34,7 +34,7 @@ def GetStockInfo(request):
             temp['price'] = stock.CurrentPrice
             temp['volume'] = stock.Quantity
             temp['change'] = (stock.CurrentPrice - stock.TodayOpeningPrice) / stock.TodayOpeningPrice
-            temp['state'] = stock.State
+            temp['state'] = 1-stock.State
             temp['price_limit'] = float(stock.UpLimit)*100
             StocksInfoList.append(temp)
     else:
@@ -46,7 +46,7 @@ def GetStockInfo(request):
             temp['price'] = stock.CurrentPrice
             temp['volume'] = stock.Quantity
             temp['change'] = (stock.CurrentPrice - stock.TodayOpeningPrice) / stock.TodayOpeningPrice
-            temp['state'] = stock.State
+            temp['state'] = 1-stock.State
             temp['price_limit'] = float(stock.UpLimit)*100
             StocksInfoList.append(temp)
     # 临时显示用数据
@@ -91,7 +91,7 @@ def GetStockList(request):
     Sell_list_in = List['sell_list']
     Sell_list_out = []
     for sell in Sell_list_in:
-        Sell_list_out.append({"id": sell[3], "p_id": sell[4], "price": sell[7], "amount": sell[6]})
+        Sell_list_out.append({"id": sell[3], "s_id": sell[4], "price": sell[7], "amount": sell[6]})
     StockList = {"buy_list": Buy_list_out, "sell_list": Sell_list_out}
     '''
     StockList = {}
