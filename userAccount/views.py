@@ -57,15 +57,14 @@ def login(request):
 	if request.POST:
 		if request.POST.has_key(u'staffid'):
 			staffid = request.POST[u'staffid'].encode('utf-8')
-			# request.session['sessionid'] = staffid
+			request.session['sessionid'] = staffid
 		if request.POST.has_key(u'staffname'):
 			staffname = request.POST[u'staffname'].encode('utf-8')
 			request.session['sessionname'] = staffname
 		if request.POST.has_key(u'password'):
 			password = request.POST[u'password'].encode('utf-8')
-		request.session['sessionstate'] = 'normal'
+		request.session['sessionstate'] = 'Administrator'
 		request.session['sessionimage'] = 'headshot.png'
-
 		if (staffname == "" or password == "" or staffid == ""):
 			tmp = 1
 			
@@ -105,7 +104,7 @@ def login(request):
 @csrf_exempt
 def homepage(request):
 	context = {}
-
+	context['id'] = request.session.get('sessionid', default=None)
 	context['name'] = request.session.get('sessionname',default=None)
 	context['state'] = request.session.get('sessionstate',default=None)
 	context['img'] = request.session.get('sessionimage',default=None)
@@ -115,7 +114,7 @@ def homepage(request):
 @csrf_exempt
 def openSA(request):
 	context = {}
-
+	context['id'] = request.session.get('sessionid', default=None)
 	context['name'] = request.session.get('sessionname',default=None)
 	context['state'] = request.session.get('sessionstate',default=None)
 	context['img'] = request.session.get('sessionimage',default=None)
@@ -213,6 +212,7 @@ def openSA(request):
 @csrf_exempt
 def  openCA(request):
 	context = {}
+	context['id'] = request.session.get('sessionid', default=None)
 	context['name'] = request.session.get('sessionname',default=None)
 	context['state'] = request.session.get('sessionstate',default=None)
 	context['img'] = request.session.get('sessionimage',default=None)
@@ -305,6 +305,7 @@ def  openCA(request):
 @csrf_exempt
 def reportSecurityLoss(request):
 	context = {}
+	context['id'] = request.session.get('sessionid', default=None)
 	context['name'] = request.session.get('sessionname',default=None)
 	context['state'] = request.session.get('sessionstate',default=None)
 	context['img'] = request.session.get('sessionimage',default=None)
@@ -379,6 +380,7 @@ def reportSecurityLoss(request):
 @csrf_exempt
 def reportCapitalLoss(request):
 	context = {}
+	context['id'] = request.session.get('sessionid', default=None)
 	context['name'] = request.session.get('sessionname',default=None)
 	context['state'] = request.session.get('sessionstate',default=None)
 	context['img'] = request.session.get('sessionimage',default=None)
@@ -452,6 +454,7 @@ def reportCapitalLoss(request):
 @csrf_exempt
 def resubmitSA(request):
 	context = {}
+	context['id'] = request.session.get('sessionid', default=None)
 	context['name'] = request.session.get('sessionname',default=None)
 	context['state'] = request.session.get('sessionstate',default=None)
 	context['img'] = request.session.get('sessionimage',default=None)
@@ -539,6 +542,7 @@ def resubmitSA(request):
 @csrf_exempt
 def resubmitCA(request):
 	context = {}
+	context['id'] = request.session.get('sessionid', default=None)
 	context['name'] = request.session.get('sessionname',default=None)
 	context['state'] = request.session.get('sessionstate',default=None)
 	context['img'] = request.session.get('sessionimage',default=None)
@@ -588,9 +592,11 @@ def resubmitCA(request):
 @csrf_exempt
 def closeSA(request):
 	context = {}
+	context['id'] = request.session.get('sessionid', default=None)
 	context['name'] = request.session.get('sessionname',default=None)
 	context['state'] = request.session.get('sessionstate',default=None)
 	context['img'] = request.session.get('sessionimage',default=None)
+
 	request.encoding='utf-8'
 
 	# 标志位
@@ -668,6 +674,7 @@ def closeSA(request):
 @csrf_exempt
 def closeCA(request):
 	context = {}
+	context['id'] = request.session.get('sessionid', default=None)
 	context['name'] = request.session.get('sessionname',default=None)
 	context['state'] = request.session.get('sessionstate',default=None)
 	context['img'] = request.session.get('sessionimage',default=None)
@@ -739,6 +746,7 @@ def closeCA(request):
 @csrf_exempt
 def operation(request):#存取款
 	context = {}
+	context['id'] = request.session.get('sessionid', default=None)
 	context['name'] = request.session.get('sessionname',default=None)
 	context['state'] = request.session.get('sessionstate',default=None)
 	context['img'] = request.session.get('sessionimage',default=None)
@@ -895,6 +903,7 @@ def operation(request):#存取款
 @csrf_exempt
 def changePassword(request):#改密码
 	context = {}
+	context['id'] = request.session.get('sessionid', default=None)
 	context['name'] = request.session.get('sessionname',default=None)
 	context['state'] = request.session.get('sessionstate',default=None)
 	context['img'] = request.session.get('sessionimage',default=None)
