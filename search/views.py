@@ -18,6 +18,32 @@ import random
 
 HasOpened = False
 
+@csrf_exempt
+def search_history(req):
+	if req.method == 'POST':
+		stockinfo = req.POST.get('stockInfo')
+		tt = req.POST.get('searchTime')
+		t = datetime.strptime(tt,'%Y-%m-%d')
+		try:
+			x = StockInfo.objects.get(Q(StockID=stockinfo)|Q(StockName=stockinfo))
+			t1 = datetime(year=t.year,month=t.month,day=t.day)
+			t2 = datetime(year=t.year,month=t.month,day=t.day,hour=23,minute=59,second=59)
+			historyinfo = StockHistoryInfo.objects.filter(StockID=x,HistoryTime__gte=t1,HistoryTime__lte=t2).order_by('-HistoryTime')[:100]
+		except StockInfo.DoesNotExist:
+			pass
+		except StockHistoryInfo.DoesNotExist:
+			pass
+		else:
+			if len(historyinfo) == 0 :
+				data = {"result":0,'HistoryInfo':JsonWrap(historyinfo)}
+			else:
+				data = {"result": 1, 'HistoryInfo': JsonWrap(historyinfo)}
+			return JsonResponse(data)
+	else:
+		res = {}
+		res["result"] = 0
+		return JsonResponse(res)
+
 def JsonWrap(historyinfo):
 	list = []
 	for i in historyinfo:
@@ -120,23 +146,6 @@ def refresh_1min(req):
 		res["result"] = 0
 		return JsonResponse(res)
 
-
-def search_history(req):
-	if req.method == 'POST':
-		stockid = req.POST.get('stockid')
-		starttime = req.POST.get('starttime')
-		endtime = req.POST.get('endtime')
-		try:
-			historyinfo = StockHistoryInfo.objects.filter(StockID=stockid,HistoryTime__gte=starttime,HistoryTime__lte=endtime)
-		except StockInfo.DoesNotExist:
-			pass
-		else:
-			return JsonResponse({"result":1,'history_info':JsonWrap(historyinfo)})
-	else:
-		res = {}
-		res["result"] = 0
-		return JsonResponse(res)
-
 def update_realtime(stockcurrentdata):
 	try:
 		for stockid in stockcurrentdata:
@@ -205,7 +214,9 @@ class UpdateDbRegular(threading.Thread):
 			for i in xrange(lg):
 				A_D = random.random()*0.2-0.1
 				if currentprice[i] <= 5 and A_D <0:
-					A_D = -A_D;
+					A_D = -A_D
+				if currentprice[i] >= 100 and A_D >0:
+					A_D = -A_D
 				rd = A_D*currentprice[i]
 				currentprice[i] = currentprice[i] + rd
 				data[stockid[i]] = [currentprice[i],A_D]
@@ -226,4 +237,4 @@ class UpdateDbRegular(threading.Thread):
 					maxvalue[i] = 0
 					minvalue[i] = 100
 			count = count + 1
-			sleep(0.1)
+			sleep(1)
