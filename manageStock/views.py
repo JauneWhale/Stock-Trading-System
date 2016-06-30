@@ -24,23 +24,31 @@ def GetStockInfo(request):
     adminID = request.GET['id']
     StocksInfoList = []
      # StockID, StockName, Amount, CurrentPrice, QuoteChange, UpLimit, DownLimit, State
-    stocks = StockManage.objects.filter(AdminID=adminID)#缺
-    if len(stocks) == 0:
-        stocks = StockInfo.objects.all()
-    for Stock in stocks:
-        if len(stocks) == 0:
-            stock = Stock
-        else:
+    stocks = StockManage.objects.filter(AdminID=adminID) # 缺
+    if len(stocks) != 0:
+        for Stock in stocks:
             stock = Stock.StockID
-        temp = {}
-        temp['id'] = stock.StockID
-        temp['name'] = stock.StockName
-        temp['price'] = stock.CurrentPrice
-        temp['volume'] = stock.Quantity
-        temp['change'] = (stock.CurrentPrice - stock.TodayOpeningPrice) / stock.TodayOpeningPrice
-        temp['state'] = stock.State
-        temp['price_limit'] = stock.UpLimit
-        StocksInfoList.append(temp)
+            temp = {}
+            temp['id'] = stock.StockID
+            temp['name'] = stock.StockName
+            temp['price'] = stock.CurrentPrice
+            temp['volume'] = stock.Quantity
+            temp['change'] = (stock.CurrentPrice - stock.TodayOpeningPrice) / stock.TodayOpeningPrice
+            temp['state'] = stock.State
+            temp['price_limit'] = float(stock.UpLimit)*100
+            StocksInfoList.append(temp)
+    else:
+        stocks = StockInfo.objects.all()
+        for stock in stocks:
+            temp = {}
+            temp['id'] = stock.StockID
+            temp['name'] = stock.StockName
+            temp['price'] = stock.CurrentPrice
+            temp['volume'] = stock.Quantity
+            temp['change'] = (stock.CurrentPrice - stock.TodayOpeningPrice) / stock.TodayOpeningPrice
+            temp['state'] = stock.State
+            temp['price_limit'] = float(stock.UpLimit)*100
+            StocksInfoList.append(temp)
     # 临时显示用数据
     '''
     stock1 = {}
@@ -74,7 +82,17 @@ def GetStockInfo(request):
 #返回列表
 def GetStockList(request):
     stockID = request.GET['id']
-    StockList = central.interface.admin_query(stockID)
+    List = central.interface.admin_query(stockID)
+    print List
+    Buy_list_in = List['buy_list']
+    Buy_list_out = []
+    for buy in Buy_list_in:
+        Buy_list_out.append({"id": buy[3], "p_id": buy[4], "price": buy[7], "amount": buy[6]})
+    Sell_list_in = List['sell_list']
+    Sell_list_out = []
+    for sell in Sell_list_in:
+        Sell_list_out.append({"id": sell[3], "p_id": sell[4], "price": sell[7], "amount": sell[6]})
+    StockList = {"buy_list": Buy_list_out, "sell_list": Sell_list_out}
     '''
     StockList = {}
     # Price, Buy
@@ -113,9 +131,9 @@ def SetLimit(request):
     try:
         stock = StockInfo.objects.get(StockID=stockID)
         if int(up) == 1:
-            stock.UpLimit = float(limit)
+            stock.UpLimit = float(limit)/100
         else:
-            stock.BottomLimit = float(limit)
+            stock.BottomLimit = float(limit)/100
         stock.save()
         data = {'state': 1}
     except:
