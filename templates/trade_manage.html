@@ -190,7 +190,8 @@
         }
 
         $(document).ready(function(){
-            sid = {{sid|safe}};;
+            sid = {{sid|safe}};
+            $("#username").text("{{name|safe}}");
             $.getJSON('getStockInfo/', {id:sid}, function(json){
                 var list = '';
                 var stock = json;
@@ -301,9 +302,9 @@
 
 					<div class="account-details">
 
-						<span class="account-name">Bob</span>
+						<span id="username" class="account-name">Bob</span>
 
-						<span class="account-role">Administrator</span>
+						<span id="userstate" class="account-role">Administrator</span>
 
 						<span class="account-actions">
 							<a href="javascript:;">Profile</a> |
@@ -320,43 +321,20 @@
 				<ul id="main-nav" class="nav nav-tabs nav-stacked">
 
 					<li>
+						<a href="/userAccount/homepage">
+              				<i class="icon-signin"></i>
+							Home Page
+						</a>
+					</li>
+
+					<li>
 						<a href="#">
 							<i class="icon-th-list"></i>
 							Stock Manage
 						</a>
 					</li>
 
-					<li>
-						<a href="#">
-              <i class="icon-signin"></i>
-							Open
-						</a>
-					</li>
-
-          <li>
-            <a href="#">
-              <i class="icon-file"></i>
-              Report the Loss
-            </a>
-          </li>
-
-          <li>
-            <a href="#">
-              <i class="icon-retweet"></i>
-              Re-submit
-            </a>
-          </li>
-
-          <li>
-            <a href="#">
-              <i class="icon-signout"></i>
-              Close an Account
-            </a>
-          </li>
-
 				</ul>
-
-
 
 				<hr />
 

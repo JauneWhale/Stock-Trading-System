@@ -12,9 +12,11 @@ import central
 def home(request):
     try:
         ID = request.GET['id']
+        name = request.GET['name']
     except:
         ID = "001"
-    return render(request, 'trade_manage.html', {"sid": ID})
+        name = "Bob"
+    return render(request, 'trade_manage.html', {"sid": ID, "name": name})
 
 
 #返回股票的列表
